@@ -33,6 +33,8 @@
 	<c:if test="${member != null }">
 	<p>${member.nickname }님 환영합니다.</p>
 		<a href="<c:url value='/member/logout'/>">[로그아웃]</a>
+		<a href="<c:url value='/board/list'/>">[게시글 목록]</a>
+		
 	</c:if>
 </body>
 </html>
