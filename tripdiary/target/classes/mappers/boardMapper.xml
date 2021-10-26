@@ -6,8 +6,19 @@
 
 	<!-- 게시판 글 작성 -->
 	<insert id="insert">
-		INSERT INTO BOARD ( BOARD_NUM, MEMBER_NUM, PLACE, CONTENT, REGDATE, TRIPDATE, LIKE_CNT)
-		VALUES(BOARD_SEQ.NEXTVAL, #{memberNum}, #{place}, #{content}, sysdate, #{tripdate}, 0 )
+		INSERT INTO BOARD( BOARD_NUM, MEMBER_NUM, PLACE, CONTENT, REGDATE, TRIPDATE, td_like_cnt )
+		VALUES( BOARD_SEQ.NEXTVAL, 2 , #{place}, #{content}, SYSDATE, #{tripdate}, 0)
+
 	</insert>
+	
+	<select id="list" resultType="com.tripdiary.vo.BoardVo">
+		SELECT   BOARD_NUM
+			   , REGDATE
+			   , TRIPDATE
+			   , td_like_cnt
+		  FROM MP_BOARD
+		  ORDER BY BNO DESC
+	</select>
+
 
 </mapper>

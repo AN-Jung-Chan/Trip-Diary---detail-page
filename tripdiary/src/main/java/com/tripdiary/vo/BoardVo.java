@@ -1,7 +1,7 @@
 package com.tripdiary.vo;
 
 import java.sql.Timestamp;
-import java.util.Date;
+import java.sql.Date;
 
 public class BoardVo {
 	private int boardNum;
@@ -10,7 +10,7 @@ public class BoardVo {
 	private String content;
 	private Timestamp regdate;
 	private Date tripdate;
-	private int liktCnt;
+	private int tdLiktCnt;
 
 	public int getBoardNum() {
 		return boardNum;
@@ -60,12 +60,12 @@ public class BoardVo {
 		this.tripdate = tripdate;
 	}
 
-	public int getLiktCnt() {
-		return liktCnt;
+	public int getTdLiktCnt() {
+		return tdLiktCnt;
 	}
 
-	public void setLiktCnt(int liktCnt) {
-		this.liktCnt = liktCnt;
+	public void setTdLiktCnt(int tdLiktCnt) {
+		this.tdLiktCnt = tdLiktCnt;
 	}
 
 }
