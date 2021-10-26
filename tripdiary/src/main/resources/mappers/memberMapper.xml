@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="memberMapper">
+
+	<!-- 회원가입 -->
+	<insert id="register">
+		INSERT INTO 
+		MEMBER (member_num, id, password, nickname, email, birth_year, birth, gender, regdate, admin)
+		VALUES(member_seq.nextval, #{id}, #{password}, #{nickname}, #{email}, #{birthYear}, #{birth}, #{gender}, sysdate, 0 )
+	</insert>
+
+	<!-- 로그인 -->
+	<select id="login" resultType="memberVo">
+		SELECT ID, PASSWORD, NICKNAME
+		FROM MEMBER
+		WHERE ID = #{id}
+		AND PASSWORD = #{password}
+	</select>
+
+</mapper>
