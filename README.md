@@ -1,2 +1,2 @@
-# Trip-Diary---detail-page
+# TripDiary-detailPage
 my part
