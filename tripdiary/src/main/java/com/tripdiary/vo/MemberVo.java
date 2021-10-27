@@ -94,4 +94,11 @@ public class MemberVo {
 		this.admin = admin;
 	}
 
+	@Override
+	public String toString() {
+		return "MemberVo [memberNum=" + memberNum + ", id=" + id + ", password=" + password + ", nickname=" + nickname
+				+ ", email=" + email + ", birthYear=" + birthYear + ", birth=" + birth + ", regdate=" + regdate
+				+ ", gender=" + gender + ", admin=" + admin + "]";
+	}
+
 }

@@ -7,7 +7,7 @@
 	<!-- 게시판 글 작성 -->
 	<insert id="insert">
 		INSERT INTO BOARD( BOARD_NUM, MEMBER_NUM, PLACE, CONTENT, REGDATE, TRIPDATE, td_like_cnt )
-		VALUES( BOARD_SEQ.NEXTVAL, 2 , #{place}, #{content}, SYSDATE, #{tripdate}, 0)
+		VALUES( BOARD_SEQ.NEXTVAL, #{memberNum} , #{place}, #{content}, SYSDATE, #{tripdate}, 0)
 
 	</insert>
 	

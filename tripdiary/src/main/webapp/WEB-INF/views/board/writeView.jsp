@@ -70,6 +70,7 @@
 										<button class="write_btn" type="submit">작성</button>	
 									</td>
 								</tr>	
+								<input type="hidden" name="memberNum" value="${member.memberNum}" >
 							</c:if>
 							<c:if test="${member.id == null}">
 								<p>로그인 후에 작성하실 수 있습니다.</p>

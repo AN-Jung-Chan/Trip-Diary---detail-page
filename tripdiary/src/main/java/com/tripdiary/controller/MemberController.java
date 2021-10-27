@@ -48,11 +48,11 @@ public class MemberController {
 		HttpSession session = req.getSession();
 
 		MemberVo login = service.login(vo);
-
 		if (login == null) {
 			session.setAttribute("member", null);
 			rttr.addFlashAttribute("msg", false);
 		} else {
+			System.out.println(login.toString());
 			session.setAttribute("member", login);
 		}
 

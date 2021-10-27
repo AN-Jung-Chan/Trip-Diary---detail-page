@@ -12,6 +12,21 @@ public class BoardVo {
 	private Date tripdate;
 	private int tdLiktCnt;
 
+	public BoardVo() {
+
+	}
+
+	public BoardVo(int boardNum, int memberNum, String place, String content, Timestamp regdate, Date tripdate,
+			int tdLiktCnt) {
+		this.boardNum = boardNum;
+		this.memberNum = memberNum;
+		this.place = place;
+		this.content = content;
+		this.regdate = regdate;
+		this.tripdate = tripdate;
+		this.tdLiktCnt = tdLiktCnt;
+	}
+
 	public int getBoardNum() {
 		return boardNum;
 	}
