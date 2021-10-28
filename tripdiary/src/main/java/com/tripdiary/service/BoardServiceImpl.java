@@ -26,5 +26,4 @@ public class BoardServiceImpl implements BoardService {
 	public List<BoardVo> list() throws Exception {
 		return dao.list();
 	}
-
 }

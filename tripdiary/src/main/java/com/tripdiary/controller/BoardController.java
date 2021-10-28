@@ -44,10 +44,10 @@ public class BoardController {
 	@RequestMapping(value = "/board/list", method = RequestMethod.GET)
 	public String list(Model model) throws Exception {
 		logger.info("list");
-		
+
 		List<BoardVo> list = service.list();
 		System.out.println(list.toString());
-		
+
 		model.addAttribute("list", list);
 
 		return "board/list";

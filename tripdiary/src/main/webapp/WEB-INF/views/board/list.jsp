@@ -27,7 +27,9 @@ pageEncoding="UTF-8"%>
 						
 						<c:forEach items="${list}" var = "list">
 							<tr>
-								<td><c:out value="${list.boardNum}" /></td>
+								<td>
+									<a href="/readView?boardNum=${list.boardNum}"><c:out value="${list.boardNum}" /></a>
+								</td>
 								<td><c:out value="${list.memberNum}" /></td>
 								<td><fmt:formatDate value="${list.tripdate}" pattern="yyyy-MM-dd"/></td>
 								<td><fmt:formatDate value="${list.regdate}" pattern="yyyy-MM-dd"/></td>

@@ -83,4 +83,10 @@ public class BoardVo {
 		this.tdLiktCnt = tdLiktCnt;
 	}
 
+	@Override
+	public String toString() {
+		return "BoardVo [boardNum=" + boardNum + ", memberNum=" + memberNum + ", place=" + place + ", content="
+				+ content + ", regdate=" + regdate + ", tripdate=" + tripdate + ", tdLiktCnt=" + tdLiktCnt + "]";
+	}
+
 }

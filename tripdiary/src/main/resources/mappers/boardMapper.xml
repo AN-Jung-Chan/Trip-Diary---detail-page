@@ -11,7 +11,7 @@
 
 	</insert>
 	
-	<select id="list" resultType="com.tripdiary.vo.BoardVo">
+	<select id="list" resultType="BoardVo">
 		SELECT 
 			board_num, 
 			member_num,
