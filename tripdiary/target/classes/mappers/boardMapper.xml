@@ -12,11 +12,8 @@
 	</insert>
 	
 	<select id="list" resultType="com.tripdiary.vo.BoardVo">
-		SELECT   BOARD_NUM
-			   , REGDATE
-			   , TRIPDATE
-			   , td_like_cnt
-		  FROM MP_BOARD
+		SELECT BOARD_NUM, REGDATE, TRIPDATE
+		  FROM BOARD
 		  ORDER BY BNO DESC
 	</select>
 
