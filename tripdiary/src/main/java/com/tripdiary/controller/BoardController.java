@@ -1,5 +1,7 @@
 package com.tripdiary.controller;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import org.slf4j.Logger;
@@ -42,10 +44,12 @@ public class BoardController {
 	@RequestMapping(value = "/board/list", method = RequestMethod.GET)
 	public String list(Model model) throws Exception {
 		logger.info("list");
-
-		model.addAttribute("list", service.list());
+		
+		List<BoardVo> list = service.list();
+		System.out.println(list.toString());
+		
+		model.addAttribute("list", list);
 
 		return "board/list";
-
 	}
 }
