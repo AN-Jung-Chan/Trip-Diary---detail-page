@@ -12,9 +12,14 @@
 	</insert>
 	
 	<select id="list" resultType="com.tripdiary.vo.BoardVo">
-		SELECT BOARD_NUM, REGDATE, TRIPDATE
-		  FROM BOARD
-		  ORDER BY BNO DESC
+		SELECT 
+			board_num, 
+			member_num,
+			REGDATE, 
+			TRIPDATE
+		FROM 
+		  	BOARD
+		ORDER BY BOARD_NUM DESC
 	</select>
 
 
