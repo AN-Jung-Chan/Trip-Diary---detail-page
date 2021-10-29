@@ -1,5 +1,7 @@
 package com.tripdiary.controller;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import org.slf4j.Logger;
@@ -10,7 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.tripdiary.service.ReadService;
-import com.tripdiary.vo.BoardVo;
+import com.tripdiary.vo.ReadVo;
+import com.tripdiary.vo.ReplyVo;
 
 @Controller
 public class ReadController {
@@ -20,15 +23,20 @@ public class ReadController {
 	@Inject
 	ReadService service;
 
-	// 게시판 상세 보기
+	// 게시판 상세 보기 + 댓글CRUD
 	@RequestMapping(value = "/readView", method = RequestMethod.GET)
-	public String read(BoardVo boardVo, Model model) throws Exception {
+	public String read(ReadVo readVo, ReplyVo replyVo, Model model) throws Exception {
 
 		logger.info("read");
 
-		System.out.println(boardVo.toString());
+		System.out.println(readVo.toString());
 
-		model.addAttribute("read", service.read(boardVo.getBoardNum()));
+		model.addAttribute("read", service.read(readVo.getBoardNum()));
+
+		List<ReplyVo> replyList = service.replyList(replyVo.getBoardNum());
+		System.out.println(replyList.toString());
+
+		model.addAttribute("replyList", replyList);
 
 		return "readView";
 	}
