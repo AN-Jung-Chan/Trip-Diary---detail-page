@@ -6,22 +6,22 @@ public class ReplyCmd {
 	private int replyNum;
 	private int boardNum;
 	private int memberNum;
-	private String nickname;
 	private String content;
 	private Timestamp regdate;
+	private String nickname;
 
 	public ReplyCmd() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public ReplyCmd(int replyNum, int boardNum, int memberNum, String nickname, String content, Timestamp regdate) {
+	public ReplyCmd(int replyNum, int boardNum, int memberNum, String content, Timestamp regdate, String nickname) {
 		super();
 		this.replyNum = replyNum;
 		this.boardNum = boardNum;
 		this.memberNum = memberNum;
-		this.nickname = nickname;
 		this.content = content;
 		this.regdate = regdate;
+		this.nickname = nickname;
 	}
 
 	public int getReplyNum() {
@@ -48,14 +48,6 @@ public class ReplyCmd {
 		this.memberNum = memberNum;
 	}
 
-	public String getNickname() {
-		return nickname;
-	}
-
-	public void setNickname(String nickname) {
-		this.nickname = nickname;
-	}
-
 	public String getContent() {
 		return content;
 	}
@@ -72,10 +64,18 @@ public class ReplyCmd {
 		this.regdate = regdate;
 	}
 
+	public String getNickname() {
+		return nickname;
+	}
+
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
+	}
+
 	@Override
 	public String toString() {
-		return "ReplyVo [replyNum=" + replyNum + ", boardNum=" + boardNum + ", memberNum=" + memberNum + ", nickname="
-				+ nickname + ", content=" + content + ", regdate=" + regdate + "]";
+		return "ReplyCmd [replyNum=" + replyNum + ", boardNum=" + boardNum + ", memberNum=" + memberNum + ", content="
+				+ content + ", regdate=" + regdate + ", nickname=" + nickname + "]";
 	}
 
 }

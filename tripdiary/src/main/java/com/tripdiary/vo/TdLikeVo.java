@@ -1,14 +1,14 @@
 package com.tripdiary.vo;
 
-public class TdLike {
+public class TdLikeVo {
 	private int tdlikeNum;
 	private int memberNum;
 	private int boardNum;
 
-	public TdLike() {
+	public TdLikeVo() {
 	}
 
-	public TdLike(int tdlikeNum, int memberNum, int boardNum) {
+	public TdLikeVo(int tdlikeNum, int memberNum, int boardNum) {
 		super();
 		this.tdlikeNum = tdlikeNum;
 		this.memberNum = memberNum;

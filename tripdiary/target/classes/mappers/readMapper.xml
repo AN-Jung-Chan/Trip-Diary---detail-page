@@ -4,21 +4,52 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="readMapper">
 
+	<!-- 로그인 -->
+	<select id="login" resultType="memberVo">
+		SELECT * from
+			MEMBER
+		WHERE 
+			ID = #{id}
+	</select>
+
+	<!-- 게시글 목록 -->
+	<select id="list" resultType="boardVo">
+		SELECT 
+			board_num, 
+			member_num,
+			REGDATE, 
+			TRIPDATE
+		FROM 
+		  	BOARD
+		ORDER BY BOARD_NUM DESC
+	</select>
+
 
 	<!-- 게시글 상세보기 -->
 	<select id="read" parameterType="int" resultType="ReadVo">
 		select
-			B.board_num,
-			B.member_num,
-			A.nickname,
-			B.content,
-			B.regdate,
-			B.tripdate
-		from
-			member A, board B
-		where
-			A.member_num = B.member_num
-			and board_num = #{boardNum}
+			A.board_num,
+    		A.member_num,
+    		A.content,
+    		A.regdate,
+    		A.tripdate,
+    		B.org_file_name AS board_org_file_name, 
+ 			B.store_file_name AS board_store_file_name,
+ 			B.file_type AS board_file_type,
+    		C.nickname,
+    		D.org_file_name AS profile_org_file_name, 
+ 			D.store_file_name AS profile_store_file_name,
+ 			D.file_type AS profile_file_type
+		from 
+    		board A, 
+    		board_img B,
+    		MEMBER C,
+    		PROFILE_IMG D
+		where 
+    		A.board_num = B.board_num
+    		and A.member_num = C.member_num
+    		and C.member_num = D.member_num
+    		and A.board_num = #{boardNum}
 	</select>
 	
 	<!-- 게시글 수정하기는 태민이꺼 게시글 작성 받아오기 -->

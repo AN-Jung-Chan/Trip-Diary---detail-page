@@ -2,11 +2,19 @@ package com.tripdiary.service;
 
 import java.util.List;
 
+import com.tripdiary.vo.BoardVo;
+import com.tripdiary.vo.MemberVo;
 import com.tripdiary.vo.ReadVo;
 import com.tripdiary.vo.ReplyCmd;
 import com.tripdiary.vo.ReplyVo;
 
 public interface ReadService {
+
+	// 로그인 - 임시
+	public MemberVo login(String id) throws Exception;
+
+	// 게시물 목록 조회
+	public List<BoardVo> list() throws Exception;
 
 	// 게시물 상세 보기 - 맡은 주 기능
 	public ReadVo read(int boardNum) throws Exception;

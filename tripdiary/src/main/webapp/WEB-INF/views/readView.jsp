@@ -12,39 +12,21 @@
 	<div id="root">
 		<header>
 		</header>
-			<a href="/board/list">목록</a>
+			<a href="/list">목록</a>
 			<hr/>
 			<section id="container">
 				<form role="form"  method="post">
-				<table>
-					<tbody>
-						<tr>
-							<td>
-								<label for="content">작성자</label>
-								<c:out value="${read.nickname}" />
-							</td>
-						</tr>
-						<tr>
-							<td>
-								<c:out value="${read.content}" />
-							</td>
-						</tr>
-						
-						<tr>
-							<td>
-								<label for="regdate">작성날짜</label>
-								<fmt:formatDate value="${read.regdate}" pattern="yyyy-MM-dd"/>					
-							</td>
-						</tr>		
-						
-						<tr>
-							<td>
-								<label for="tripdate">여행날짜</label>
-								<fmt:formatDate value="${read.tripdate}" pattern="yyyy-MM-dd"/>					
-							</td>
-						</tr>	
-					</tbody>			
-				</table>
+					<p>
+					<label for="nickname">작성자</label> : <c:out value="${read.nickname}" /><br>
+					
+					<label for="content">작성자</label> : <c:out value="${read.content}" /><br>
+					
+					<label for="regdate">작성날짜</label> : 
+					<fmt:formatDate value="${read.regdate}" pattern="yyyy-MM-dd"/><br>
+					
+					<label for="tripdate">여행날짜</label> : 
+					<fmt:formatDate value="${read.tripdate}" pattern="yyyy-MM-dd"/><br><br></p>				
+							
 				
 			<!-- 댓글 목록 [순서 작성자, 작성시간  그 아래 작성내용] -->
 			<div id="reply">
@@ -60,9 +42,8 @@
 				</div>
 			</form>
 			
-			<!-- 댓글 작성 [글만 받아오기] -->
+			<!-- 댓글 작성 [정보 받아오기] -->
 			<form name="replyForm" action="/replyWrite" method="post">
-			  <input type="hidden" id="replyNum" name="replyNum" value="${read.replyNum}" />
 			  <input type="hidden" id="boardNum" name="boardNum" value="${read.boardNum}" />
 			  <input type="hidden" id=memberNum name="memberNum" value="${read.memberNum}" />
 			

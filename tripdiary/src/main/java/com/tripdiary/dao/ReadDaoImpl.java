@@ -7,6 +7,8 @@ import javax.inject.Inject;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
+import com.tripdiary.vo.BoardVo;
+import com.tripdiary.vo.MemberVo;
 import com.tripdiary.vo.ReadVo;
 import com.tripdiary.vo.ReplyCmd;
 import com.tripdiary.vo.ReplyVo;
@@ -16,6 +18,18 @@ public class ReadDaoImpl implements ReadDao {
 
 	@Inject
 	private SqlSession sqlSession;
+
+	// 로그인 - 임시
+	@Override
+	public MemberVo login(String id) throws Exception {
+		return sqlSession.selectOne("readMapper.login", id);
+	}
+
+	// 게시글 목록 조회 - 임시
+	@Override
+	public List<BoardVo> list() throws Exception {
+		return sqlSession.selectList("readMapper.list");
+	}
 
 	// 게시물 상세 보기 - 맡은 주 기능
 	@Override
