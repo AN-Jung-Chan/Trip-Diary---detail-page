@@ -11,7 +11,7 @@
 
 	</insert>
 	
-	<select id="list" resultType="BoardVo">
+	<select id="list" resultType="boardVo">
 		SELECT 
 			board_num, 
 			member_num,

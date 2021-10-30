@@ -53,17 +53,20 @@
 							<c:if test="${member.id != null}">
 								<tr>
 									<td>
-										<label for="place">지역</label><input type="text" id="place" name="place" class="chk" title="제목을 입력하세요."/>
+										<label for="place">지역</label>
+										<input type="text" id="place" name="place" class="chk" title="제목을 입력하세요."/>
 									</td>
 								</tr>	
 								<tr>
 									<td>
-										<label for="content">내용</label><textarea id="content" name="content" class="chk" title="내용을 입력하세요."></textarea>
+										<label for="content">내용</label>
+										<textarea id="content" name="content" class="chk" title="내용을 입력하세요."></textarea>
 									</td>
 								</tr>
 								<tr>
 									<td>
-										<label for="tripdate">여행 날짜</label><input type="date" id="tripdate" name="tripdate" class="chk" title="여행날짜를 입력하세요." />
+										<label for="tripdate">여행 날짜</label>
+										<input type="date" id="tripdate" name="tripdate" class="chk" title="여행날짜를 입력하세요." />
 									</td>
 								<tr>
 									<td>						

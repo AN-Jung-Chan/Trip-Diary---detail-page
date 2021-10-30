@@ -13,6 +13,9 @@
 	<typeAliases>
 		<typeAlias type="com.tripdiary.vo.MemberVo" alias="memberVo" />
 		<typeAlias type="com.tripdiary.vo.BoardVo" alias="boardVo" />
+		<typeAlias type="com.tripdiary.vo.ReadVo" alias="readVo" />
+		<typeAlias type="com.tripdiary.vo.ReplyVo" alias="replyVo" />
+		<typeAlias type="com.tripdiary.vo.ReplyCmd" alias="replyCmd" />
 	</typeAliases>
 
 

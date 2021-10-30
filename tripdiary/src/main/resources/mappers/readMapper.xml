@@ -4,20 +4,59 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="readMapper">
 
-	
+
 	<!-- 게시글 상세보기 -->
-	<select id="read" parameterType="int" resultType="BoardVo">
-		SELECT
-				board_num, 
-				member_num,
-				content,
-				REGDATE, 
-				TRIPDATE
-		 FROM 
-		 		board
-		 WHERE 
-		 		board_num = #{boardNum}
+	<select id="read" parameterType="int" resultType="ReadVo">
+		select
+			B.board_num,
+			B.member_num,
+			A.nickname,
+			B.content,
+			B.regdate,
+			B.tripdate
+		from
+			member A, board B
+		where
+			A.member_num = B.member_num
+			and board_num = #{boardNum}
+	</select>
+	
+	<!-- 게시글 수정하기는 태민이꺼 게시글 작성 받아오기 -->
+	
+	<!-- 게시글 삭제 마지막에 구현하기 -->
+	
+	<!-- 댓글 등록 -->
+	<insert id="replyWrite">
+		insert into reply ( 
+			reply_num,
+    		board_num,
+    		member_num,
+    		content )
+    	values (
+    		reply_seq.nextval,
+    		#{boardNum},
+    		#{memberNum},
+    		#{content} )
+	</insert>
+	
+	<!-- 댓글 목록 -->
+	<select id="replyList" resultType="replyCmd">
+    	select
+    		A.reply_num,
+    		A.board_num,
+    		A.member_num,
+    		b.nickname,
+    		A.content,
+    		A.regdate
+		from 
+    		reply A, member B
+		where 
+    		A.member_num = B.member_num
+    		and board_num = #{boardNum}
 	</select>
 
+	<!-- 댓글 수정 -->
+	
+	<!-- 댓글 삭제 -->
 
 </mapper>

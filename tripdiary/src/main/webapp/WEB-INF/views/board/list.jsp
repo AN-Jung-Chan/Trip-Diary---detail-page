@@ -1,18 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" 
 pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <html>
-	<head>
-	 	<title>게시판</title>
-	</head>
+<head>
+<meta charset="UTF-8">
+<title>메인</title>
+</head>
 	<body>
 		<div id="root">
-			<header>
-				<h1> 게시판</h1>
-			</header>
-			<hr />
-			 
 			<div>
 				<%@include file="nav.jsp" %>
 			</div>

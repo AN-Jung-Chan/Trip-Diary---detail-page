@@ -59,6 +59,29 @@
 							</tr>						
 					</tbody>			
 				</table>
+				
+				<!-- 댓글 -->
+				<div id="reply">
+  					<ol class="replyList">
+    					<c:forEach items="${replyList}" var="replyList">
+      					<li>
+      					<table>
+        					<tr>
+								<td>
+        							작성자 : ${replyList.memberNum}<br />
+        							작성 날짜 :  <fmt:formatDate value="${replyList.regdate}" pattern="yyyy-MM-dd" />
+        						</td>
+							</tr>
+							<tr>
+								<td>
+        							<c:out value="${replyList.content}" />
+        						</td>
+							</tr>
+						</table>
+      					</li>
+    					</c:forEach>   
+  					</ol>
+				</div>
 			</form>
 		</section>
 	</div>	
