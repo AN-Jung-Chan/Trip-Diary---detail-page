@@ -6,12 +6,12 @@
 <ul>
 	<li><a href="/list">목록</a></li>
 	<li>
-		<c:if test="${member != null}"><a href="/logout">로그아웃</a></c:if>
-		<c:if test="${member == null}"><a href="/">로그인</a></c:if>
+		<c:if test="${memberLoginTest != null}"><a href="/signOut">로그아웃</a></c:if>
+		<c:if test="${memberLoginTest == null}"><a href="/">로그인</a></c:if>
 	</li>
 	<li>
-		<c:if test="${member != null}">
-			<p>${member.nickname}님 안녕하세요.</p>
+		<c:if test="${memberLoginTest != null}">
+			<p>${memberLoginTest.nickname}님 안녕하세요.</p>
 		</c:if>
 	</li>
 </ul>

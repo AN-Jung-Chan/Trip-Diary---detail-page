@@ -11,14 +11,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.tripdiary.service.ReadService;
-import com.tripdiary.vo.BoardVo;
 import com.tripdiary.vo.MemberVo;
 import com.tripdiary.vo.ReadVo;
-import com.tripdiary.vo.ReplyCmd;
-import com.tripdiary.vo.ReplyVo;
 
 @Controller
 public class ReadController {
@@ -28,62 +25,62 @@ public class ReadController {
 	@Inject
 	ReadService service;
 
-	// 메인 - 임시
-	@RequestMapping("/")
-	public String main() {
-		return "home";
+	// 세션 확인용 로그인 테스트 코드 : 삭제해야됨 : 시작
+	@RequestMapping(value = "/", method = RequestMethod.GET)
+	public String signInGet() {
+		return "signIn";
 	}
 
-	// 로그인
-	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public String login(String id, HttpSession session, RedirectAttributes rttr) throws Exception {
+	// 로그인 테스트
+	@RequestMapping(value = "/signIn", method = RequestMethod.POST)
+	public String signInPost(String id, String password, HttpSession session) throws Exception {
 
-		MemberVo login = service.login(id);
+		MemberVo memberLoginTest = service.login(id);
 
-		if (login == null) {
-			session.setAttribute("loginMember", null);
-			rttr.addFlashAttribute("msg", false);
+		if (memberLoginTest.getPassword().equals(password)) {
+			session.setAttribute("memberLoginTest", memberLoginTest);
+			return "redirect:/list";
 		} else {
-			System.out.println(login.toString());
-			session.setAttribute("loginMember", login);
+			return "signIn";
 		}
-
-		return "redirect:/";
 	}
 
 	// 로그아웃
-	@RequestMapping(value = "/logout", method = RequestMethod.GET)
-	public String logout(HttpSession session) throws Exception {
-
+	@RequestMapping(value = "/signOut", method = RequestMethod.GET)
+	public String signOutGet(HttpSession session) {
 		session.invalidate();
-
 		return "redirect:/";
 	}
+	// 세션 확인용 로그인 테스트 코드 : 삭제해야됨 : 끝
 
-	// 게시판 목록 조회
+	// 게시판 목록 조회 - 임시
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
-	public String list(Model model) throws Exception {
+	public String list(Model model, HttpSession session) throws Exception {
 		logger.info("list");
+		MemberVo memberVo = (MemberVo) session.getAttribute("memberLoginTest");
 
-		List<BoardVo> list = service.list();
-		System.out.println(list.toString());
+		if (memberVo != null) {
+			System.out.println(memberVo);
+			List<ReadVo> list = service.list();
+			System.out.println(list.toString());
 
-		model.addAttribute("list", list);
-
+			model.addAttribute("list", list);
+		}
 		return "list";
 	}
 
-	// 게시판 상세 보기 + 댓글CRUD
+	// 게시판 상세 보기 + 댓글 목록
 	@RequestMapping(value = "/readView", method = RequestMethod.GET)
-	public String read(ReadVo readVo, Model model) throws Exception {
-
+	public String read(Model model, HttpSession session, @RequestParam("boardNum") int boardNum) throws Exception {
 		logger.info("read");
+		
+		
+		ReadVo read = service.read(boardNum);
+		System.out.println(read.toString());
 
-		System.out.println(readVo.toString());
-
-		model.addAttribute("read", service.read(readVo.getBoardNum()));
+		model.addAttribute("read", read);
 
 		return "readView";
-	}
 
+	}
 }

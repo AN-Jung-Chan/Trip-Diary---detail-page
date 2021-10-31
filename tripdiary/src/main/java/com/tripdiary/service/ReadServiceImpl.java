@@ -7,7 +7,6 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Repository;
 
 import com.tripdiary.dao.ReadDao;
-import com.tripdiary.vo.BoardVo;
 import com.tripdiary.vo.MemberVo;
 import com.tripdiary.vo.ReadVo;
 import com.tripdiary.vo.ReplyCmd;
@@ -27,7 +26,7 @@ public class ReadServiceImpl implements ReadService {
 
 	// 게시물 목록 조회 - 임시
 	@Override
-	public List<BoardVo> list() throws Exception {
+	public List<ReadVo> list() throws Exception {
 		return dao.list();
 	}
 

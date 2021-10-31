@@ -16,7 +16,7 @@
 		</div>
 		<hr />
 
-		<section id="container">
+		<section id="boardList">
 			<form role="form" method="get" action="/list">
 				<table>
 					<tr>
@@ -40,9 +40,5 @@
 		</section>
 		<hr />
 	</div>
-
-	<script src="resources/js/jquery.min.js"></script>
-	<script src="resources/js/popper.js"></script>
-	<script src="resources/js/bootstrap.min.js"></script>
 </body>
 </html>

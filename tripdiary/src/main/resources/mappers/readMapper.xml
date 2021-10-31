@@ -13,43 +13,48 @@
 	</select>
 
 	<!-- 게시글 목록 -->
-	<select id="list" resultType="boardVo">
-		SELECT 
-			board_num, 
-			member_num,
-			REGDATE, 
-			TRIPDATE
-		FROM 
-		  	BOARD
+	<select id="list" resultType="readVo">
+		select
+			A.board_num,
+		    A.member_num,
+		    A.content,
+		    A.regdate,
+		    A.tripdate,
+		    B.nickname,
+		    C.org_file_name as profile_org_file_name, 
+		 	C.store_file_name as profile_store_file_name,
+		 	C.file_type as profile_file_type
+		from 
+		    BOARD A, 
+		    MEMBER B,
+		    PROFILE_IMG C
+		where 
+		    A.member_num = B.member_num
+		    and A.member_num = C.member_num
 		ORDER BY BOARD_NUM DESC
 	</select>
 
 
 	<!-- 게시글 상세보기 -->
-	<select id="read" parameterType="int" resultType="ReadVo">
+	<select id="read" parameterType="int" resultType="readVo">
 		select
 			A.board_num,
-    		A.member_num,
-    		A.content,
-    		A.regdate,
-    		A.tripdate,
-    		B.org_file_name AS board_org_file_name, 
- 			B.store_file_name AS board_store_file_name,
- 			B.file_type AS board_file_type,
-    		C.nickname,
-    		D.org_file_name AS profile_org_file_name, 
- 			D.store_file_name AS profile_store_file_name,
- 			D.file_type AS profile_file_type
+		    A.member_num,
+		    A.content,
+		    A.regdate,
+		    A.tripdate,
+		    B.nickname,
+		    C.org_file_name as profile_org_file_name, 
+		 	C.store_file_name as profile_store_file_name,
+		 	C.file_type as profile_file_type
 		from 
-    		board A, 
-    		board_img B,
-    		MEMBER C,
-    		PROFILE_IMG D
+		    BOARD A, 
+		    MEMBER B,
+		    PROFILE_IMG C
 		where 
-    		A.board_num = B.board_num
-    		and A.member_num = C.member_num
-    		and C.member_num = D.member_num
-    		and A.board_num = #{boardNum}
+		    A.member_num = B.member_num
+		    and A.member_num = C.member_num
+		    and board_num = #{boardNum}
 	</select>
 	
 	<!-- 게시글 수정하기는 태민이꺼 게시글 작성 받아오기 -->
