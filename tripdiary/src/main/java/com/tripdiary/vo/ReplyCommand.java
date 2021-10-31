@@ -2,7 +2,7 @@ package com.tripdiary.vo;
 
 import java.sql.Timestamp;
 
-public class ReplyCmd {
+public class ReplyCommand {
 	private int replyNum;
 	private int boardNum;
 	private int memberNum;
@@ -10,11 +10,11 @@ public class ReplyCmd {
 	private Timestamp regdate;
 	private String nickname;
 
-	public ReplyCmd() {
+	public ReplyCommand() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public ReplyCmd(int replyNum, int boardNum, int memberNum, String content, Timestamp regdate, String nickname) {
+	public ReplyCommand(int replyNum, int boardNum, int memberNum, String content, Timestamp regdate, String nickname) {
 		super();
 		this.replyNum = replyNum;
 		this.boardNum = boardNum;
@@ -74,8 +74,8 @@ public class ReplyCmd {
 
 	@Override
 	public String toString() {
-		return "ReplyCmd [replyNum=" + replyNum + ", boardNum=" + boardNum + ", memberNum=" + memberNum + ", content="
-				+ content + ", regdate=" + regdate + ", nickname=" + nickname + "]";
+		return "ReplyCommand [replyNum=" + replyNum + ", boardNum=" + boardNum + ", memberNum=" + memberNum
+				+ ", content=" + content + ", regdate=" + regdate + ", nickname=" + nickname + "]";
 	}
 
 }

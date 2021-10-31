@@ -11,11 +11,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import com.tripdiary.service.ReadService;
 import com.tripdiary.vo.MemberVo;
 import com.tripdiary.vo.ReadVo;
+import com.tripdiary.vo.ReplyCommand;
+import com.tripdiary.vo.ReplyVo;
 
 @Controller
 public class ReadController {
@@ -71,16 +72,92 @@ public class ReadController {
 
 	// 게시판 상세 보기 + 댓글 목록
 	@RequestMapping(value = "/readView", method = RequestMethod.GET)
-	public String read(Model model, HttpSession session, @RequestParam("boardNum") int boardNum) throws Exception {
+	public String read(int boardNum, Model model, HttpSession session) throws Exception {
 		logger.info("read");
-		
-		
+
+		System.out.println(boardNum);
+
+		// 게시글 목록 - boardNum, memberNum, nickname, profileVo
 		ReadVo read = service.read(boardNum);
 		System.out.println(read.toString());
-
 		model.addAttribute("read", read);
 
-		return "readView";
+		// 현재 로그인 멤버 확인
+		MemberVo memberVo = (MemberVo) session.getAttribute("memberLoginTest");
+		System.out.println(memberVo.toString());
+		model.addAttribute("memberVo", memberVo);
 
+		// 해당 게시글 댓글 목록 - replyVo, nickname
+		List<ReplyCommand> replyList = service.replyList(boardNum);
+		System.out.println(replyList.toString());
+		model.addAttribute("replyList", replyList);
+
+		return "readView";
 	}
+
+	// 댓글 작성
+	@RequestMapping(value = "/replyWrite", method = RequestMethod.POST)
+	public String replyWrite(ReplyVo replyVo, Model model, int boardNum, HttpSession session) throws Exception {
+		logger.info("reply Write");
+
+		// hidden에 들어가는거 - 삭제해야하나??
+		ReadVo read = service.read(boardNum);
+		System.out.println(read.toString());
+		model.addAttribute("read", read);
+
+		// 현재 로그인 멤버 확인 - 삭제해야함
+		MemberVo memberVo = (MemberVo) session.getAttribute("memberLoginTest");
+		System.out.println(memberVo.toString());
+		model.addAttribute("memberVo", memberVo);
+
+		// 작성
+		service.replyWrite(replyVo);
+		System.out.println(replyVo.toString());
+
+		return "redirect:/readView?boardNum=" + replyVo.getBoardNum();
+	}
+
+	// 댓글 수정 GET
+	@RequestMapping(value = "/replyUpdateView", method = RequestMethod.GET)
+	public String replyUpdateView(ReplyVo replyVo, Model model, int boardNum, HttpSession session) throws Exception {
+		logger.info("reply Update");
+
+		// hidden에 들어가는거 - 삭제해야하나??
+		ReadVo read = service.read(boardNum);
+		System.out.println(read.toString());
+		model.addAttribute("read", read);
+
+		// 현재 로그인 멤버 확인 - 삭제해야함
+		MemberVo memberVo = (MemberVo) session.getAttribute("memberLoginTest");
+		System.out.println(memberVo.toString());
+		model.addAttribute("memberVo", memberVo);
+
+		// 수정하기위해 replyVo에서 정보 가져오기
+		model.addAttribute("replyUpdate", service.selectReply(replyVo.getReplyNum()));
+
+		return "redirect:/readView?boardNum=" + replyVo.getBoardNum();
+	}
+
+	// 댓글 수정 POST
+	@RequestMapping(value = "/replyUpdate", method = RequestMethod.POST)
+	public String replyUpdate(ReplyVo replyVo, Model model, int boardNum, HttpSession session) throws Exception {
+		logger.info("reply Update");
+
+		// hidden에 들어가는거 - 삭제해야하나??
+		ReadVo read = service.read(boardNum);
+		System.out.println(read.toString());
+		model.addAttribute("read", read);
+
+		// 현재 로그인 멤버 확인 - 삭제해야함
+		MemberVo memberVo = (MemberVo) session.getAttribute("memberLoginTest");
+		System.out.println(memberVo.toString());
+		model.addAttribute("memberVo", memberVo);
+
+		// 댓글 작성 업데이트
+		service.replyUpdate(replyVo);
+		System.out.println(replyVo.toString());
+
+		return "redirect:/readView?boardNum=" + replyVo.getBoardNum();
+	}
+
 }

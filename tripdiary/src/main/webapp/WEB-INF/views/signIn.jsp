@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<div id="root">
+	<div class="container">
 		<h2>로그인 페이지</h2>
 		
 		<form name='homeForm' method="post" action="/signIn">

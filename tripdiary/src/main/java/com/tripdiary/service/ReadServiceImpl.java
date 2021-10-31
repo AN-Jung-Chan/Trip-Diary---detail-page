@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 import com.tripdiary.dao.ReadDao;
 import com.tripdiary.vo.MemberVo;
 import com.tripdiary.vo.ReadVo;
-import com.tripdiary.vo.ReplyCmd;
+import com.tripdiary.vo.ReplyCommand;
 import com.tripdiary.vo.ReplyVo;
 
 @Repository
@@ -48,28 +48,33 @@ public class ReadServiceImpl implements ReadService {
 		dao.delete(boardNum);
 	}
 
+	// 댓글 조회
+	@Override
+	public List<ReplyCommand> replyList(int boardNum) throws Exception {
+		return dao.replyList(boardNum);
+	}
+
 	// 댓글 작성
 	@Override
 	public void replyWrite(ReplyVo replyVo) throws Exception {
 		dao.replyWrite(replyVo);
 	}
 
-	// 댓글 조회
-	@Override
-	public List<ReplyCmd> replyList(int boardNum) throws Exception {
-		return dao.replyList(boardNum);
-	}
-
 	// 댓글 수정
 	@Override
-	public void replyUpdate(ReplyCmd replyCmd) throws Exception {
-		dao.replyUpdate(replyCmd);
+	public void replyUpdate(ReplyVo replyVo) throws Exception {
+		dao.replyUpdate(replyVo);
 	}
 
 	// 댓글 삭제
 	@Override
-	public void replyDelete(ReplyCmd replyCmd) throws Exception {
-		dao.replyDelete(replyCmd);
+	public void replyDelete(ReplyVo replyVo) throws Exception {
+		dao.replyDelete(replyVo);
+	}
+
+	// 선택된 댓글 조회
+	public ReplyVo selectReply(int replyNum) throws Exception {
+		return dao.selectReply(replyNum);
 	}
 
 }

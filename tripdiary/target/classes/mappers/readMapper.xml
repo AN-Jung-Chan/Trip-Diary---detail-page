@@ -61,38 +61,77 @@
 	
 	<!-- 게시글 삭제 마지막에 구현하기 -->
 	
-	<!-- 댓글 등록 -->
+	<!-- 댓글 목록 -->
+	<select id="replyList" parameterType="int" resultType="replyCommand">
+    	select
+		    A.reply_num,
+		    A.board_num,
+		    A.member_num,
+		    C.nickname,
+		    A.content,
+		    A.regdate
+		from 
+		    reply A, board B, member C
+		where
+		    A.board_num = B.board_num
+		    and B.member_num = C.member_num
+		    and A.board_num = #{boardNum}
+		order by reply_num DESC
+	</select>
+	
+	<!-- 댓글 작성 -->
 	<insert id="replyWrite">
-		insert into reply ( 
-			reply_num,
-    		board_num,
-    		member_num,
-    		content )
-    	values (
-    		reply_seq.nextval,
-    		#{boardNum},
-    		#{memberNum},
-    		#{content} )
+		insert into 
+			reply 
+			  ( reply_num,
+				board_num,
+				member_num,
+				content,
+				REGDATE )
+		VALUES 
+			  ( reply_seq.nextval,
+				#{boardNum},
+				#{memberNum},
+				#{content},
+				SYSDATE )
 	</insert>
 	
-	<!-- 댓글 목록 -->
-	<select id="replyList" resultType="replyCmd">
-    	select
-    		A.reply_num,
-    		A.board_num,
-    		A.member_num,
-    		b.nickname,
-    		A.content,
-    		A.regdate
-		from 
-    		reply A, member B
-		where 
-    		A.member_num = B.member_num
-    		and board_num = #{boardNum}
-	</select>
-
 	<!-- 댓글 수정 -->
+	<update id="replyUpdate" parameterType="replyVo">
+		update 
+		    reply 
+		set 
+		    content = #{content}
+		where 
+		    reply_num = #{replyNum}
+		    and board_num = #{boardNum}
+		    and member_num = #{memberNum}
+	</update>
 	
 	<!-- 댓글 삭제 -->
+	<delete id="replyDelete" parameterType="replyVo">
+		delete from
+		    reply
+		where 
+		    reply_num = #{replyNum}
+	</delete>
+	
+	<!-- 선택된 댓글 조회 -->
+	<select id="selectReply" resultType="readVo">
+	select
+	    A.reply_num,
+	    A.board_num,
+	    A.member_num,
+	    A.content,
+	    A.regdate
+	from 
+	    reply A, board B, member C
+	where
+	    A.board_num = B.board_num
+	    and A.member_num = C.member_num
+	    and reply_num = #{replyNum}
+	
+	</select>
+	
 
 </mapper>

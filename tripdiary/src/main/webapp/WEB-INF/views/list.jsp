@@ -10,7 +10,7 @@
 <title>메인</title>
 </head>
 <body>
-	<div id="root">
+	<div class="container">
 		<div>
 			<%@include file="nav.jsp"%>
 		</div>
@@ -30,7 +30,7 @@
 						<tr>
 							<td><a href="/readView?boardNum=${list.boardNum}">
 							<c:out value="${list.boardNum}" /></a></td>
-							<td><c:out value="${list.memberNum}" /></td>
+							<td><c:out value="${list.nickname}" /></td>
 							<td><fmt:formatDate value="${list.tripdate}" pattern="yyyy-MM-dd" /></td>
 							<td><fmt:formatDate value="${list.regdate}" pattern="yyyy-MM-dd" /></td>
 						</tr>
