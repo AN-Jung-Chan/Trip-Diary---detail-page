@@ -3,7 +3,7 @@ package com.tripdiary.vo;
 import java.sql.Timestamp;
 
 public class ReplyCommand {
-	private int replyNum;
+	private Integer replyNum;
 	private int boardNum;
 	private int memberNum;
 	private String content;

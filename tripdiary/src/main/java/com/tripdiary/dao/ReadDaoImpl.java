@@ -65,13 +65,15 @@ public class ReadDaoImpl implements ReadDao {
 	// 댓글 수정
 	@Override
 	public void replyUpdate(ReplyVo replyVo) throws Exception {
-		sqlSession.update("readMapper.replyUpdate", replyVo);
+		int updateCheck = sqlSession.update("readMapper.replyUpdate", replyVo);
+		System.out.println("updateCheck : " + updateCheck);
 	}
 
 	// 댓글 삭제
 	@Override
 	public void replyDelete(ReplyVo replyVo) throws Exception {
-		sqlSession.delete("readMapper.replyDelete", replyVo);
+		int deleteCheck = sqlSession.delete("readMapper.replyDelete", replyVo);
+		System.out.println("deleteCheck : "  + deleteCheck);
 	}
 
 	// 선택된 댓글 조회

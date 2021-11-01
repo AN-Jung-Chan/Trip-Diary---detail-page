@@ -30,7 +30,7 @@ public class ReadController {
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String signInGet() {
 		return "signIn";
-	}
+	} 
 
 	// 로그인 테스트
 	@RequestMapping(value = "/signIn", method = RequestMethod.POST)
@@ -84,7 +84,7 @@ public class ReadController {
 
 		// 현재 로그인 멤버 확인
 		MemberVo memberVo = (MemberVo) session.getAttribute("memberLoginTest");
-		System.out.println(memberVo.toString());
+		System.out.println("readView(memberVo) : " + memberVo.toString());
 		model.addAttribute("memberVo", memberVo);
 
 		// 해당 게시글 댓글 목록 - replyVo, nickname
@@ -107,7 +107,7 @@ public class ReadController {
 
 		// 현재 로그인 멤버 확인 - 삭제해야함
 		MemberVo memberVo = (MemberVo) session.getAttribute("memberLoginTest");
-		System.out.println(memberVo.toString());
+		System.out.println("replyWrite(memberVo) : " + memberVo.toString());
 		model.addAttribute("memberVo", memberVo);
 
 		// 작성
@@ -118,8 +118,8 @@ public class ReadController {
 	}
 
 	// 댓글 수정 GET
-	@RequestMapping(value = "/replyUpdateView", method = RequestMethod.GET)
-	public String replyUpdateView(ReplyVo replyVo, Model model, int boardNum, HttpSession session) throws Exception {
+	@RequestMapping(value = "/replyUpdate", method = RequestMethod.GET)
+	public String getReplyUpdate(ReplyVo replyVo, Model model, int boardNum, HttpSession session) throws Exception {
 		logger.info("reply Update");
 
 		// hidden에 들어가는거 - 삭제해야하나??
@@ -129,20 +129,24 @@ public class ReadController {
 
 		// 현재 로그인 멤버 확인 - 삭제해야함
 		MemberVo memberVo = (MemberVo) session.getAttribute("memberLoginTest");
-		System.out.println(memberVo.toString());
+		System.out.println("replyUpdate(memberVo) : " + memberVo.toString());
 		model.addAttribute("memberVo", memberVo);
 
-		// 수정하기위해 replyVo에서 정보 가져오기
-		model.addAttribute("replyUpdate", service.selectReply(replyVo.getReplyNum()));
+		System.out.println("replyUpdate,replyVo : " + replyVo.toString());
+		ReplyVo replyVoCheck = service.selectReply(replyVo.getReplyNum());
+		System.out.println(replyVoCheck.toString());
 
-		return "redirect:/readView?boardNum=" + replyVo.getBoardNum();
+		// 수정하기위해 replyVo에서 정보 가져오기
+		model.addAttribute("selectReply", replyVoCheck);
+
+		return "replyUpdate";
 	}
 
 	// 댓글 수정 POST
 	@RequestMapping(value = "/replyUpdate", method = RequestMethod.POST)
 	public String replyUpdate(ReplyVo replyVo, Model model, int boardNum, HttpSession session) throws Exception {
 		logger.info("reply Update");
-
+		System.out.println("replyUpdate,ㄷㄹㅇ");
 		// hidden에 들어가는거 - 삭제해야하나??
 		ReadVo read = service.read(boardNum);
 		System.out.println(read.toString());
@@ -155,6 +159,28 @@ public class ReadController {
 
 		// 댓글 작성 업데이트
 		service.replyUpdate(replyVo);
+		System.out.println(replyVo.toString());
+
+		return "redirect:/readView?boardNum=" + replyVo.getBoardNum();
+	}
+
+	// 댓글 삭제 POST
+	@RequestMapping(value = "/replyDelete", method = RequestMethod.GET)
+	public String replyDelete(ReplyVo replyVo, Model model, int boardNum, HttpSession session) throws Exception {
+		logger.info("reply Delete");
+		System.out.println("replyDelete 들어왔다");
+		// hidden에 들어가는거 - 삭제해야하나??
+		ReadVo read = service.read(boardNum);
+		System.out.println(read.toString());
+		model.addAttribute("read", read);
+
+		// 현재 로그인 멤버 확인 - 삭제해야함
+		MemberVo memberVo = (MemberVo) session.getAttribute("memberLoginTest");
+		System.out.println(memberVo.toString());
+		model.addAttribute("memberVo", memberVo);
+
+		// 댓글 삭제 업데이트
+		service.replyDelete(replyVo);
 		System.out.println(replyVo.toString());
 
 		return "redirect:/readView?boardNum=" + replyVo.getBoardNum();

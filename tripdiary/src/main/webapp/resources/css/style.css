@@ -1,67 +1,107 @@
 .header {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  
-  height: auto;
-  color: white;
-  background-color:white;
-  font-weight: bold;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 5px;
-  padding-left: 5%;
-  padding-right: 5%;
-
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	height: auto;
+	color: white;
+	background-color: white;
+	font-weight: bold;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 5px;
+	padding-left: 5%;
+	padding-right: 5%;
 }
-.header2{
-	text-align:center;
-	margin : auto;
+
+.header2 {
+	text-align: center;
+	margin: auto;
 	width: 1044px;
 }
-.logo{
+
+.logo {
 	margin-right: 2%;
 }
+
 .bg-light {
-    background-color: white!important;
+	background-color: white !important;
 }
+
 .navbar-expand-lg .navbar-nav .nav-link {
-    padding-right: 1.5rem;
-    padding-left: 1.5rem;
+	padding-right: 1.5rem;
+	padding-left: 1.5rem;
 }
-.container{
+
+.container {
 	text-align: center;
 }
-#fixedbtn{
-	position:fixed;right:3%;bottom:0px;z-index:1000
+
+#fixedbtn {
+	position: fixed;
+	right: 3%;
+	bottom: 0px;
+	z-index: 1000
 }
-#fixedbtn2{
-	position:fixed;right:9%;bottom:0px;z-index:1000
+
+#fixedbtn2 {
+	position: fixed;
+	right: 9%;
+	bottom: 0px;
+	z-index: 1000
 }
-#fixedbtn3{
-	position:fixed;right:15%;bottom:0px;z-index:1000
+
+#fixedbtn3 {
+	position: fixed;
+	right: 15%;
+	bottom: 0px;
+	z-index: 1000
 }
-#fixedicon{
-	background-color:black;
+
+#fixedicon {
+	background-color: black;
 }
-#fixedicon2{
-	width : 70px;
-	position:fixed;left:5%;bottom:0px;z-index:1000
+
+#fixedicon2 {
+	width: 70px;
+	position: fixed;
+	left: 5%;
+	bottom: 0px;
+	z-index: 1000
 }
+
 .icon {
-  transition: all 0.2s linear;
+	transition: all 0.2s linear;
 }
-.icon:hover{
-  transform: scale(1.4);
+
+.icon:hover {
+	transform: scale(1.4);
 }
-.darkmode{
+
+.darkmode {
 	width: 300px;
 	height: 300px;
 	background-color: black;
 }
-.container{
+
+.container {
 	margin-top: 7%;
 }
 
+.profile {
+	position: relative;
+	width: 60px;
+	height: 60px;
+	border-radius: 50%; /*둥그런 원으로 만들기 위함*/
+	overflow: hidden;
+}
+
+.profile img {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}

@@ -48,7 +48,7 @@
 					<div>
 						<li class="nav-item dropdown">
 							<a class="nav-link dropdown-toggle " id="dropdown" data-toggle="dropdown">
-								<img alt="" src="resources/img/sample.png" class="border rounded-circle" style="width: 50px; height: 50px;">
+								<img alt="" src="resources/img/sample.png" class="border rounded-circle" style="width: 50px; height: 50px;" >
 							</a>
 							<div class="dropdown-menu" aria-labelledby="dropdown">
 								<a class="dropdown-item" href="myPage">MyPage</a>

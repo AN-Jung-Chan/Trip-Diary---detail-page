@@ -31,7 +31,7 @@
 		where 
 		    A.member_num = B.member_num
 		    and A.member_num = C.member_num
-		ORDER BY BOARD_NUM DESC
+		ORDER BY A.BOARD_NUM DESC
 	</select>
 
 
@@ -54,7 +54,7 @@
 		where 
 		    A.member_num = B.member_num
 		    and A.member_num = C.member_num
-		    and board_num = #{boardNum}
+		    and A.board_num = #{boardNum}
 	</select>
 	
 	<!-- 게시글 수정하기는 태민이꺼 게시글 작성 받아오기 -->
@@ -67,16 +67,15 @@
 		    A.reply_num,
 		    A.board_num,
 		    A.member_num,
-		    C.nickname,
+		    B.nickname,
 		    A.content,
 		    A.regdate
 		from 
-		    reply A, board B, member C
+		    reply A, member B
 		where
-		    A.board_num = B.board_num
-		    and B.member_num = C.member_num
+		    A.member_num = B.member_num
 		    and A.board_num = #{boardNum}
-		order by reply_num DESC
+		order by A.reply_num DESC
 	</select>
 	
 	<!-- 댓글 작성 -->
@@ -114,10 +113,12 @@
 		    reply
 		where 
 		    reply_num = #{replyNum}
+		    and board_num = #{boardNum}
+		    and member_num = #{memberNum}
 	</delete>
 	
 	<!-- 선택된 댓글 조회 -->
-	<select id="selectReply" resultType="readVo">
+	<select id="selectReply" resultType="replyVo">
 	select
 	    A.reply_num,
 	    A.board_num,
@@ -129,7 +130,7 @@
 	where
 	    A.board_num = B.board_num
 	    and A.member_num = C.member_num
-	    and reply_num = #{replyNum}
+	    and A.reply_num = #{replyNum}
 	
 	</select>
 	

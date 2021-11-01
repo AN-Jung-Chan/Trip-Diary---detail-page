@@ -6,10 +6,19 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+	crossorigin="anonymous" />
+<link href="${pageContext.request.contextPath}/resources/css/style.css" 
+	rel="stylesheet"/>
 
 <title>메인</title>
 </head>
 <body>
+	<jsp:include page="common/header.jsp" flush="false" />
+    <jsp:include page="common/sidebar.jsp" flush="false" />
 	<div class="container">
 		<div>
 			<%@include file="nav.jsp"%>
