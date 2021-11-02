@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.tripdiary.service.ReadService;
+import com.tripdiary.vo.BoardImgVo;
 import com.tripdiary.vo.MemberVo;
 import com.tripdiary.vo.ReadVo;
 import com.tripdiary.vo.ReplyCommand;
@@ -30,7 +31,7 @@ public class ReadController {
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String signInGet() {
 		return "signIn";
-	} 
+	}
 
 	// 로그인 테스트
 	@RequestMapping(value = "/signIn", method = RequestMethod.POST)
@@ -91,6 +92,12 @@ public class ReadController {
 		List<ReplyCommand> replyList = service.replyList(boardNum);
 		System.out.println(replyList.toString());
 		model.addAttribute("replyList", replyList);
+
+		// 보드 이미지 목록
+		List<BoardImgVo> boardImgList = service.BoardImgList(boardNum);
+		System.out.println(boardImgList.toString());
+		
+		model.addAttribute("boardImgList", boardImgList);
 
 		return "readView";
 	}

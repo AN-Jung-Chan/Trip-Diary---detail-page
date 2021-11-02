@@ -7,6 +7,7 @@ import javax.inject.Inject;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
+import com.tripdiary.vo.BoardImgVo;
 import com.tripdiary.vo.MemberVo;
 import com.tripdiary.vo.ReadVo;
 import com.tripdiary.vo.ReplyCommand;
@@ -73,7 +74,7 @@ public class ReadDaoImpl implements ReadDao {
 	@Override
 	public void replyDelete(ReplyVo replyVo) throws Exception {
 		int deleteCheck = sqlSession.delete("readMapper.replyDelete", replyVo);
-		System.out.println("deleteCheck : "  + deleteCheck);
+		System.out.println("deleteCheck : " + deleteCheck);
 	}
 
 	// 선택된 댓글 조회
@@ -81,4 +82,8 @@ public class ReadDaoImpl implements ReadDao {
 		return sqlSession.selectOne("readMapper.selectReply", replyNum);
 	}
 
+	// 보드 이미지 목록
+	public List<BoardImgVo> BoardImgList(int boardNum) throws Exception {
+		return sqlSession.selectList("boardImgList", boardNum);
+	}
 }

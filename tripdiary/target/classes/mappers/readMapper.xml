@@ -119,20 +119,58 @@
 	
 	<!-- 선택된 댓글 조회 -->
 	<select id="selectReply" resultType="replyVo">
-	select
-	    A.reply_num,
-	    A.board_num,
-	    A.member_num,
-	    A.content,
-	    A.regdate
-	from 
-	    reply A, board B, member C
-	where
-	    A.board_num = B.board_num
-	    and A.member_num = C.member_num
-	    and A.reply_num = #{replyNum}
-	
+		select
+		    A.reply_num,
+		    A.board_num,
+		    A.member_num,
+		    A.content,
+		    A.regdate
+		from 
+		    reply A, board B, member C
+		where
+		    A.board_num = B.board_num
+		    and A.member_num = C.member_num
+		    and A.reply_num = #{replyNum}
 	</select>
 	
+	<!-- 보드 이미지 목록 -->
+	<select id="boardImgList" parameterType="int" resultType="boardImgVo">
+	select
+	    A.board_img_num,
+	    A.board_num,
+	    A.org_file_name,
+	    A.store_file_name,
+	    A.file_size,
+	    A.file_type,
+	    A.main_img
+	from
+	    board_img A, board B
+	where
+	    A.board_num = B.board_num
+	    and A.board_num = #{boardNum}
+	</select>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 </mapper>

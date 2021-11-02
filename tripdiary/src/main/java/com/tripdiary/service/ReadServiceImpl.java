@@ -7,6 +7,7 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Repository;
 
 import com.tripdiary.dao.ReadDao;
+import com.tripdiary.vo.BoardImgVo;
 import com.tripdiary.vo.MemberVo;
 import com.tripdiary.vo.ReadVo;
 import com.tripdiary.vo.ReplyCommand;
@@ -75,6 +76,11 @@ public class ReadServiceImpl implements ReadService {
 	// 선택된 댓글 조회
 	public ReplyVo selectReply(int replyNum) throws Exception {
 		return dao.selectReply(replyNum);
+	}
+
+	// 보드 이미지 목록
+	public List<BoardImgVo> BoardImgList(int boardNum) throws Exception {
+		return dao.BoardImgList(boardNum);
 	}
 
 }

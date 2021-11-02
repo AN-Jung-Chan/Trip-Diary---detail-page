@@ -2,6 +2,7 @@ package com.tripdiary.dao;
 
 import java.util.List;
 
+import com.tripdiary.vo.BoardImgVo;
 import com.tripdiary.vo.MemberVo;
 import com.tripdiary.vo.ReadVo;
 import com.tripdiary.vo.ReplyCommand;
@@ -38,5 +39,8 @@ public interface ReadDao {
 	
 	// 선택된 댓글 조회
 	public ReplyVo selectReply(int replyNum) throws Exception;
+	
+	// 보드 이미지 목록
+	public List<BoardImgVo> BoardImgList (int boardNum) throws Exception;
 
 }
