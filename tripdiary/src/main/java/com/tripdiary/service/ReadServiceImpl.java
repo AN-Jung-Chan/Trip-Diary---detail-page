@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import com.tripdiary.dao.ReadDao;
 import com.tripdiary.vo.BoardImgVo;
 import com.tripdiary.vo.MemberVo;
+import com.tripdiary.vo.PickVo;
 import com.tripdiary.vo.ReadVo;
 import com.tripdiary.vo.ReplyCommand;
 import com.tripdiary.vo.ReplyVo;
@@ -83,4 +84,18 @@ public class ReadServiceImpl implements ReadService {
 		return dao.BoardImgList(boardNum);
 	}
 
+	// 픽 테이블 멤버넘,보드넘 조회
+	public PickVo selectPick(PickVo pickVo) throws Exception {
+		return dao.selectPick(pickVo);
+	}
+
+	// 회원이 찜하기를 누르지 않은 상태라면 해당 게시물에서 찜하기 추가
+	public void insertPick(PickVo pickVo) throws Exception {
+		dao.insertPick(pickVo);
+	}
+
+	// 회원이 상세 게시글 확인 시 pick테이블에 정보가 있다면 눌렀을 때 pick테이블에 삭제
+	public void deletePick(PickVo pickVo) throws Exception {
+		dao.deletePick(pickVo);
+	}
 }

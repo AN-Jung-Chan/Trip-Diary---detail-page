@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import com.tripdiary.vo.BoardImgVo;
 import com.tripdiary.vo.MemberVo;
+import com.tripdiary.vo.PickVo;
 import com.tripdiary.vo.ReadVo;
 import com.tripdiary.vo.ReplyCommand;
 import com.tripdiary.vo.ReplyVo;
@@ -84,6 +85,26 @@ public class ReadDaoImpl implements ReadDao {
 
 	// 보드 이미지 목록
 	public List<BoardImgVo> BoardImgList(int boardNum) throws Exception {
-		return sqlSession.selectList("boardImgList", boardNum);
+		return sqlSession.selectList("readMapper.boardImgList", boardNum);
+	}
+
+//	// 픽번호와 멤버번호 비교해서 같은거 조회
+//	public PickVo selectPick(int pickNum) throws Exception{
+//		return sqlSession.selectOne("readMapper.selectPick", pickNum);
+//	}
+
+	// 픽 테이블 멤버넘,보드넘 조회
+	public PickVo selectPick(PickVo pickVo) throws Exception {
+		return sqlSession.selectOne("readMapper.selectPick", pickVo);
+	}
+
+	// 회원이 찜하기를 누르지 않은 상태라면 해당 게시물에서 찜하기 추가
+	public void insertPick(PickVo pickVo) throws Exception {
+		sqlSession.insert("readMapper.insertPick", pickVo);
+	}
+
+	// 회원이 상세 게시글 확인 시 pick테이블에 정보가 있다면 눌렀을 때 pick테이블에 삭제
+	public void deletePick(PickVo pickVo) throws Exception {
+		sqlSession.delete("readMapper.deletePick", pickVo);
 	}
 }

@@ -150,9 +150,36 @@
 	    and A.board_num = #{boardNum}
 	</select>
 
+	<!-- pick 테이블 번호로 memberNum, boardNum 유무 확인 -->
+	<select id="selectPick" resultType="pickVo">
+		select * from 
+		    pick
+		where
+		    pick_num = #{pickNum} 
+		    and member_num = #{memberNum}
+		    and board_num = #{boardNum}
+	</select>
 
-
-
+	<!-- 찜하기 눌렀을 때 테이블에 존재하지 않을 경우 insert -->
+ 	<insert id="insertPick">
+ 		insert into 
+ 			pick 
+ 		values 
+ 		  (	pick_seq.nextval, 
+ 			#{memberNum}, 
+ 			#{boardNum}, 
+ 			SYSDATE )
+ 	</insert>
+ 	
+ 	<!-- 찜하기 눌렀을 때 테이블에 존재할 경우 delete -->
+ 	<delete id="deletePick" parameterType="pickVo">
+ 		delete from 
+ 			pick 
+ 		where 
+ 			pick_num = #{pickNum} 
+ 			and member_num = #{memberNum} 
+ 			and board_num = #{boardNum}
+ 	</delete>
 
 
 
