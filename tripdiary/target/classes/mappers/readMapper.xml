@@ -149,9 +149,17 @@
 	    A.board_num = B.board_num
 	    and A.board_num = #{boardNum}
 	</select>
+	
+	<!-- pick 테이블 멤버 번호로 조회 -->
+	<select id="selectPick" resultType="replyVo">
+		select * from 
+		    pick
+		where 
+		    member_num = #{memberNum}
+	</select>
 
-	<!-- pick 테이블 번호로 memberNum, boardNum 유무 확인 -->
-	<select id="selectPick" resultType="pickVo">
+	<!-- pick 테이블 pickNumdm로 memberNum, boardNum 유무 확인 -->
+	<select id="pickCheck" resultType="pickVo">
 		select * from 
 		    pick
 		where

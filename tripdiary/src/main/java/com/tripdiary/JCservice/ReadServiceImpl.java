@@ -84,9 +84,14 @@ public class ReadServiceImpl implements ReadService {
 		return dao.BoardImgList(boardNum);
 	}
 
+	// 픽테이블 멤버번호로 조회
+	public List<PickVo> selectPick(int memberNum) throws Exception {
+		return dao.selectPick(memberNum);
+	}
+
 	// 픽 테이블 멤버넘,보드넘 조회
-	public PickVo selectPick(PickVo pickVo) throws Exception {
-		return dao.selectPick(pickVo);
+	public PickVo pickCheck(PickVo pickVo) throws Exception {
+		return dao.pickCheck(pickVo);
 	}
 
 	// 회원이 찜하기를 누르지 않은 상태라면 해당 게시물에서 찜하기 추가

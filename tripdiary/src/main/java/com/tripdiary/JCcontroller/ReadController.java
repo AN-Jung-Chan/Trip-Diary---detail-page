@@ -74,13 +74,13 @@ public class ReadController {
 
 	// 게시판 상세 보기 + 댓글 목록
 	@RequestMapping(value = "/readView", method = RequestMethod.GET)
-	public String read(PickVo pickVo, int boardNum, Model model, HttpSession session) throws Exception {
+	public String read(PickVo pickVo, ReadViewCmd readCmd, Model model, HttpSession session) throws Exception {
 		logger.info("read");
 
-		System.out.println(boardNum);
+		System.out.println(readCmd.toString());
 
 		// 게시글 목록 - boardNum, memberNum, nickname, profileVo
-		ReadVo read = service.read(boardNum);
+		ReadVo read = service.read(readCmd.getBoardNum());
 		System.out.println(read.toString());
 		model.addAttribute("read", read);
 
@@ -90,33 +90,34 @@ public class ReadController {
 		model.addAttribute("memberVo", memberVo);
 
 		// 해당 게시글 댓글 목록 - replyVo, nickname
-		List<ReplyCommand> replyList = service.replyList(boardNum);
+		List<ReplyCommand> replyList = service.replyList(readCmd.getBoardNum());
 		System.out.println(replyList.toString());
 		model.addAttribute("replyList", replyList);
 
 		// 보드 이미지 목록
-		List<BoardImgVo> boardImgList = service.BoardImgList(boardNum);
+		List<BoardImgVo> boardImgList = service.BoardImgList(readCmd.getBoardNum());
 		System.out.println(boardImgList.toString());
 		model.addAttribute("boardImgList", boardImgList);
+		
+		List<PickVo> selectPick = service.selectPick(readCmd.getMemberNum());
 
 		// 회원 번호와 게시글 번호를 통해 픽테이블 조회
 		if (memberVo != null && memberVo.getMemberNum() == pickVo.getMemberNum()) {
 			// 회원이 로그인된 상태이고 로그인한 회원과 찜하기를 누른 회원이 같은지 검사 후 같다면 동작
 			System.out.println(memberVo.toString());
 
-			PickVo selectPick = service.selectPick(pickVo);
+			PickVo pickCheck = service.pickCheck(pickVo);
 			model.addAttribute("selectPick", selectPick);
 			// read에서 가져온 pickVo에 해당하는 정보가 Pick테이블에 존재하는지 확인
 			// 게시글 열람했을 때 만약 pick테이블에서 조회가 안되면 찜하기 안누른 회원
 			// 게시글 열람했을 때 만약 pick테이블에서 조회가 된다면 찜하기 누른 회원
 
-			if (selectPick == null) {
+			if (selectPick != null) {
+				PickVo pickCheck = service.pickCheck(pickVo);
+				
 				service.insertPick(pickVo);
-				model.addAttribute("insertPick", selectPick);
 
 			} else {
-				service.deletePick(pickVo);
-				model.addAttribute("deletePick", selectPick);
 			}
 
 			System.out.println(selectPick.toString()); // null일때는 투스트링 찍을 수 없기에 검사 의미 x, Dead code
