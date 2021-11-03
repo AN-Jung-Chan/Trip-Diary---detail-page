@@ -98,31 +98,6 @@ public class ReadController {
 		List<BoardImgVo> boardImgList = service.BoardImgList(readCmd.getBoardNum());
 		System.out.println(boardImgList.toString());
 		model.addAttribute("boardImgList", boardImgList);
-		
-		List<PickVo> selectPick = service.selectPick(readCmd.getMemberNum());
-
-		// 회원 번호와 게시글 번호를 통해 픽테이블 조회
-		if (memberVo != null && memberVo.getMemberNum() == pickVo.getMemberNum()) {
-			// 회원이 로그인된 상태이고 로그인한 회원과 찜하기를 누른 회원이 같은지 검사 후 같다면 동작
-			System.out.println(memberVo.toString());
-
-			PickVo pickCheck = service.pickCheck(pickVo);
-			model.addAttribute("selectPick", selectPick);
-			// read에서 가져온 pickVo에 해당하는 정보가 Pick테이블에 존재하는지 확인
-			// 게시글 열람했을 때 만약 pick테이블에서 조회가 안되면 찜하기 안누른 회원
-			// 게시글 열람했을 때 만약 pick테이블에서 조회가 된다면 찜하기 누른 회원
-
-			if (selectPick != null) {
-				PickVo pickCheck = service.pickCheck(pickVo);
-				
-				service.insertPick(pickVo);
-
-			} else {
-			}
-
-			System.out.println(selectPick.toString()); // null일때는 투스트링 찍을 수 없기에 검사 의미 x, Dead code
-
-		}
 
 		return "readView";
 

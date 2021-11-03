@@ -82,8 +82,6 @@
 			
 			<!-- 찜하기 -->
 			<div>
-			<input type="hidden" name="boardNum" value="${read.boardNum }">
-				<input type="hidden" name="memberNum" value="${memberVo.memberNum }">
 				<c:choose>
 					<c:when test="${selectPick.memberNum eq memberVo.memberNum && selectPick.boardNum eq read.boardNum}">
 						<a href="/readView?pickNum=${insertPick.pickNum}&boardNum=${read.boardNum }&memberNum=${memberVo.memberNum }" >없음</a>

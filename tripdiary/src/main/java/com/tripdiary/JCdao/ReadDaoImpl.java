@@ -100,11 +100,22 @@ public class ReadDaoImpl implements ReadDao {
 
 	// 회원이 찜하기를 누르지 않은 상태라면 해당 게시물에서 찜하기 추가
 	public void insertPick(PickVo pickVo) throws Exception {
-		sqlSession.insert("readMapper.insertPick", pickVo);
+
+		int result = sqlSession.insert("readMapper.insertPick", pickVo);
+		if (result > 0) {
+			System.out.println("(readMapper.insertPick)성공");
+		} else {
+			System.out.println("(readMapper.insertPick)실패");
+		}
 	}
 
 	// 회원이 상세 게시글 확인 시 pick테이블에 정보가 있다면 눌렀을 때 pick테이블에 삭제
 	public void deletePick(PickVo pickVo) throws Exception {
-		sqlSession.delete("readMapper.deletePick", pickVo);
+		int result = sqlSession.delete("readMapper.deletePick", pickVo);
+		if (result > 0) {
+			System.out.println("(readMapper.deletePick)성공");
+		} else {
+			System.out.println("(readMapper.deletePick)실패");
+		}
 	}
 }
