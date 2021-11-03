@@ -30,8 +30,8 @@
     </bean>
     
     <!-- scan -->
-    <context:component-scan base-package="com.tripdiary.vo" />
-    <context:component-scan base-package="com.tripdiary.dao" />
-    <context:component-scan base-package="com.tripdiary.service" />
+    <context:component-scan base-package="com.tripdiary.JCvo" />
+    <context:component-scan base-package="com.tripdiary.JCdao" />
+    <context:component-scan base-package="com.tripdiary.JCservice" />
 		
 </beans>

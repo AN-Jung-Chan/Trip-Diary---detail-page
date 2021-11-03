@@ -11,16 +11,16 @@
 	</settings>
 
 	<typeAliases>
-		<typeAlias type="com.tripdiary.vo.MemberVo" alias="memberVo" />
-		<typeAlias type="com.tripdiary.vo.BoardVo" alias="boardVo" />
-		<typeAlias type="com.tripdiary.vo.ReadVo" alias="readVo" />
-		<typeAlias type="com.tripdiary.vo.ReplyVo" alias="replyVo" />
-		<typeAlias type="com.tripdiary.vo.ReplyCommand" alias="replyCommand" />
-		<typeAlias type="com.tripdiary.vo.TdLikeVo" alias="tdLikeVo" />
-		<typeAlias type="com.tripdiary.vo.TagVo" alias="tagVo" />
-		<typeAlias type="com.tripdiary.vo.ProfileImgVo" alias="profileImgVo" />
-		<typeAlias type="com.tripdiary.vo.PickVo" alias="pickVo" />
-		<typeAlias type="com.tripdiary.vo.BoardImgVo" alias="boardImgVo" />
+		<typeAlias type="com.tripdiary.JCvo.MemberVo" alias="memberVo" />
+		<typeAlias type="com.tripdiary.JCvo.BoardVo" alias="boardVo" />
+		<typeAlias type="com.tripdiary.JCvo.ReadVo" alias="readVo" />
+		<typeAlias type="com.tripdiary.JCvo.ReplyVo" alias="replyVo" />
+		<typeAlias type="com.tripdiary.JCvo.ReplyCommand" alias="replyCommand" />
+		<typeAlias type="com.tripdiary.JCvo.TdLikeVo" alias="tdLikeVo" />
+		<typeAlias type="com.tripdiary.JCvo.TagVo" alias="tagVo" />
+		<typeAlias type="com.tripdiary.JCvo.ProfileImgVo" alias="profileImgVo" />
+		<typeAlias type="com.tripdiary.JCvo.PickVo" alias="pickVo" />
+		<typeAlias type="com.tripdiary.JCvo.BoardImgVo" alias="boardImgVo" />
 	</typeAliases>
 
 
