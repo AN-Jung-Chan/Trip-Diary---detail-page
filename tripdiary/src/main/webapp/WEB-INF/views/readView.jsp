@@ -81,15 +81,25 @@
 			
 			
 			<!-- 찜하기 -->
-			<div>
-				<c:choose>
-					<c:when test="${selectPick.memberNum eq memberVo.memberNum && selectPick.boardNum eq read.boardNum}">
-						<a href="/readView?pickNum=${insertPick.pickNum}&boardNum=${read.boardNum }&memberNum=${memberVo.memberNum }" >없음</a>
-					</c:when>
-					<c:otherwise>
-						<a href="/readView?pickNum=${deletePick.pickNum}&boardNum=${read.boardNum }&memberNum=${memberVo.memberNum }" >있음</a>
-					</c:otherwise>
-				</c:choose>
+			
+			
+			<div id="pick" >
+				<!-- 없음, pickCheck테이블 검사해서 해당 보드넘버와 멤버넘버가 없으면 눌렀을 때 정보 받아서 insert -->
+				<c:if test="${pickCheck eq null}">
+				<!--  pickNum=${selectPick.pickNum }&-->
+					<a href="/pickClick?boardNum=${read.boardNum }&memberNum=${memberVo.memberNum }" >
+						<img alt="" src="resources/img/pick_basic_white.png" class=""
+										style="width: 40px; height: 40px; object-fit: cover;">
+					</a>
+				</c:if>
+				
+				<!-- 있음, pickCheck테이블 검사해서 해당 보드넘버와 멤버넘버가 있으면 눌렀을 때 정보 받아서 delete -->
+				<c:if test="${pickCheck ne null}">
+					<a href="/pickClick?pickNum=${pickCheck.pickNum }&boardNum=${read.boardNum }&memberNum=${memberVo.memberNum }" >
+						<img alt="" src="resources/img/pick_basic_dark.png" class=""
+											style="width: 40px; height: 40px; object-fit: cover;">
+					</a>
+				</c:if>
 			</div>
 			
 			<div>
@@ -103,14 +113,16 @@
 			<div>
 				작성일 : <fmt:formatDate value="${read.regdate}" pattern="yyyy-MM-dd"/><br>
 				여행일 : <fmt:formatDate value="${read.tripdate}" pattern="yyyy-MM-dd"/><br>
-				게시글 내용 : <c:out value="${read.content}"></c:out><br><br>
+				게시글 내용 : ${read.content}<br><br>
 			</div>
 			<hr />
 			<br><br>
 		</form>
 		
+		
+		
 			<div>
-				
+
 				
 				
 			</div>

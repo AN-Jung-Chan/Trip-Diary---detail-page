@@ -85,8 +85,8 @@ public class ReadServiceImpl implements ReadService {
 	}
 
 	// 픽테이블 멤버번호로 조회
-	public List<PickVo> selectPick(int memberNum) throws Exception {
-		return dao.selectPick(memberNum);
+	public PickVo selectPick(int pickNum) throws Exception {
+		return dao.selectPick(pickNum);
 	}
 
 	// 픽 테이블 멤버넘,보드넘 조회

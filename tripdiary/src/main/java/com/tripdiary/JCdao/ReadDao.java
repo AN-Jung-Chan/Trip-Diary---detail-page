@@ -45,7 +45,7 @@ public interface ReadDao {
 	public List<BoardImgVo> BoardImgList(int boardNum) throws Exception;
 	
 	// 픽테이블 멤버번호로 조회
-	public List<PickVo> selectPick(int memberNum) throws Exception;
+	public PickVo selectPick(int pickNum) throws Exception;
 	
 	// 픽 테이블 멤버넘,보드넘 조회
 	public PickVo pickCheck(PickVo pickVo) throws Exception;

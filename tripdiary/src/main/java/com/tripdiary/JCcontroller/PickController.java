@@ -1,7 +1,5 @@
 package com.tripdiary.JCcontroller;
 
-import java.util.List;
-
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
 
@@ -16,7 +14,7 @@ import com.tripdiary.JCvo.PickVo;
 
 @Controller
 public class PickController {
-	
+
 	@Inject
 	ReadService service;
 
@@ -28,26 +26,41 @@ public class PickController {
 		System.out.println("readView(memberVo) : " + memberVo.toString());
 		model.addAttribute("memberVo", memberVo);
 
+		if (pickVo != null) {
+			System.out.println("pickVo : " + pickVo.toString());
+		} else {
+			System.out.println("널");
+		}
+
 		// 만약 memberVo가 null이 아니고 member의 memberNum과 readCmd의 boardNum이 같다면 ,
 		// 로그인상태에서 동작 확인
-		if (memberVo != null && memberVo.getMemberNum() == readCmd.getMemberNum()) {
-			System.out.println(memberVo.toString());
+		String url = "";
+		if (memberVo != null) {
+			System.out.println(memberVo.toString() + "이게 언제 뽑히냐");
 
-			List<PickVo> selectPick = service.selectPick(memberVo.getMemberNum());
-			model.addAttribute("selectPick", selectPick);
+			PickVo pickCheck = service.pickCheck(pickVo);
+			model.addAttribute("pickCheck", pickCheck);
 			// 해당 회원의 memberNum으로 조회한 pick테이블을 List로 가져와서
 			// 리스트일때 통째로 비교할때 is empty
-			if (!selectPick.isEmpty()) {
+			if (pickCheck != null) {
 				// 안비어있으면 삭제
 				service.deletePick(pickVo);
+				System.out.println("삭제 후 readCmd(당연히 없겠찌..) : " + readCmd);
+				System.out.println("delete : " + pickCheck.toString());
+				url =  "redirect:/readView?boardNum=" + pickCheck.getBoardNum() + "&memberNum=" + pickCheck.getMemberNum();
 			} else {
 				// 비어있으면 insert
 				service.insertPick(pickVo);
+				System.out.println("찜한 후 readCmd : " + readCmd);
+				System.out.println("insert : " + pickVo.toString());
+				url = "redirect:/readView?boardNum=" + pickVo.getBoardNum() + "&memberNum=" + pickVo.getMemberNum();
 			}
-			System.out.println(selectPick.toString());
-		}
-		return "redirect:/readView";
+			//return "redirect:/readView?boardNum=" + readCmd.getBoardNum();
+		} 
+		// delete 동작 후 
+		return url;
 
+//		// pickCheck
 	}
 
 }

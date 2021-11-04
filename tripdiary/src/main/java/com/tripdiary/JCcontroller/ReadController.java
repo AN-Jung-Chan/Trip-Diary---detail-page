@@ -60,10 +60,15 @@ public class ReadController {
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public String list(Model model, HttpSession session) throws Exception {
 		logger.info("list");
+
+		// 로그인시 memberVo 에 로그인 회원 memberNum 셋팅
 		MemberVo memberVo = (MemberVo) session.getAttribute("memberLoginTest");
 
+		// 만약 memberVo에 정보에 있다면 memberVo 사용가능
 		if (memberVo != null) {
 			System.out.println(memberVo);
+
+			// 동시에 readVo의 정보 전체를 List로 값 셋팅 - 사용가능
 			List<ReadVo> list = service.list();
 			System.out.println(list.toString());
 
@@ -74,20 +79,21 @@ public class ReadController {
 
 	// 게시판 상세 보기 + 댓글 목록
 	@RequestMapping(value = "/readView", method = RequestMethod.GET)
-	public String read(PickVo pickVo, ReadViewCmd readCmd, Model model, HttpSession session) throws Exception {
+	public String read(PickVo pick, ReadViewCmd readCmd, Model model, HttpSession session)
+			throws Exception {
 		logger.info("read");
 
 		System.out.println(readCmd.toString());
-
-		// 게시글 목록 - boardNum, memberNum, nickname, profileVo
-		ReadVo read = service.read(readCmd.getBoardNum());
-		System.out.println(read.toString());
-		model.addAttribute("read", read);
 
 		// 현재 로그인 멤버 확인
 		MemberVo memberVo = (MemberVo) session.getAttribute("memberLoginTest");
 		System.out.println("readView(memberVo) : " + memberVo.toString());
 		model.addAttribute("memberVo", memberVo);
+
+		// 게시글 목록 - boardNum, memberNum, nickname, profileVo
+		ReadVo read = service.read(readCmd.getBoardNum());
+		System.out.println(read.toString());
+		model.addAttribute("read", read);
 
 		// 해당 게시글 댓글 목록 - replyVo, nickname
 		List<ReplyCommand> replyList = service.replyList(readCmd.getBoardNum());
@@ -95,9 +101,21 @@ public class ReadController {
 		model.addAttribute("replyList", replyList);
 
 		// 보드 이미지 목록
-		List<BoardImgVo> boardImgList = service.BoardImgList(readCmd.getBoardNum());
+		List<BoardImgVo> boardImgList = service.BoardImgList(read.getBoardNum());
 		System.out.println(boardImgList.toString());
 		model.addAttribute("boardImgList", boardImgList);
+
+		//
+		PickVo pickVo = new PickVo(memberVo.getMemberNum(), readCmd.getBoardNum());
+		System.out.println("pickVo : " + pickVo.toString());
+		PickVo pickCheck = service.pickCheck(pickVo);
+		if (pickCheck == null) {
+			System.out.println("없음");
+		} else {
+			System.out.println("pickCheck : " + pickCheck.toString());
+		}
+
+		model.addAttribute("pickCheck", pickCheck);
 
 		return "readView";
 
