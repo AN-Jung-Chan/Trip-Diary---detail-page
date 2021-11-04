@@ -19,6 +19,7 @@ import com.tripdiary.JCvo.PickVo;
 import com.tripdiary.JCvo.ReadVo;
 import com.tripdiary.JCvo.ReplyCommand;
 import com.tripdiary.JCvo.ReplyVo;
+import com.tripdiary.JCvo.TdLikeVo;
 
 @Controller
 public class ReadController {
@@ -79,7 +80,7 @@ public class ReadController {
 
 	// 게시판 상세 보기 + 댓글 목록
 	@RequestMapping(value = "/readView", method = RequestMethod.GET)
-	public String read(PickVo pick, ReadViewCmd readCmd, Model model, HttpSession session)
+	public String read(PickVo pick, TdLikeVo tdlike, ReadViewCmd readCmd, Model model, HttpSession session)
 			throws Exception {
 		logger.info("read");
 
@@ -105,20 +106,35 @@ public class ReadController {
 		System.out.println(boardImgList.toString());
 		model.addAttribute("boardImgList", boardImgList);
 
-		//
+		// 찜 회원 확인
 		PickVo pickVo = new PickVo(memberVo.getMemberNum(), readCmd.getBoardNum());
 		System.out.println("pickVo : " + pickVo.toString());
+
 		PickVo pickCheck = service.pickCheck(pickVo);
+
 		if (pickCheck == null) {
-			System.out.println("없음");
+			System.out.println("pickCheck 없음");
 		} else {
 			System.out.println("pickCheck : " + pickCheck.toString());
 		}
 
 		model.addAttribute("pickCheck", pickCheck);
 
-		return "readView";
+		// 좋아요 회원 확인
+		TdLikeVo tdlikeVo = new TdLikeVo(memberVo.getMemberNum(), readCmd.getBoardNum());
+		System.out.println("tdlikeVo : " + tdlikeVo.toString());
 
+		TdLikeVo tdlikeCheck = service.tdlikeCheck(tdlikeVo);
+
+		if (tdlikeCheck == null) {
+			System.out.println("tdlikeCheck 없음");
+		} else {
+			System.out.println("tdlikeCheck : " + tdlikeCheck.toString());
+		}
+
+		model.addAttribute("tdlikeCheck", tdlikeCheck);
+
+		return "readView";
 	}
 
 	// 댓글 작성

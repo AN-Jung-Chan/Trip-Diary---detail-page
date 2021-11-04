@@ -8,9 +8,8 @@ public class TdLikeVo {
 	public TdLikeVo() {
 	}
 
-	public TdLikeVo(int tdlikeNum, int memberNum, int boardNum) {
+	public TdLikeVo(int memberNum, int boardNum) {
 		super();
-		this.tdlikeNum = tdlikeNum;
 		this.memberNum = memberNum;
 		this.boardNum = boardNum;
 	}
