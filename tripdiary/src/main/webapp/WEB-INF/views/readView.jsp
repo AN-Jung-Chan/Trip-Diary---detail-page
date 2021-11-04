@@ -115,11 +115,12 @@
 				
 				<!-- 있음, tdlikeCheck 검사해서 해당 보드넘버와 멤버넘버가 있으면 눌렀을 때 정보 받아서 delete -->
 				<c:if test="${tdlikeCheck ne null}">
-					<a href="/likeClick?pickNum=${tdlikeCheck.pickNum }&boardNum=${read.boardNum }&memberNum=${memberVo.memberNum }" >
+					<a href="/likeClick?tdlikeNum=${tdlikeCheck.tdlikeNum }&boardNum=${read.boardNum }&memberNum=${memberVo.memberNum }" >
 						<img alt="" src="resources/img/heart.png" class=""
 											style="width: 40px; height: 40px; object-fit: cover;">
 					</a>
 				</c:if>
+				${read. }
 			</div>
 			
 			
