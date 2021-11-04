@@ -35,6 +35,8 @@
 	<div class="container">
 		<a href="/list">목록으로</a>
 		<hr />
+		
+		<!-- profile사진, member닉네임, 게시글 내용, 작성일, 여행일  -->
 		<form role="form"  name="readForm" method="get">
 			<div>
 				<img alt="" src="<spring:url value='/image/profile_64.png'/>" style="width: 40px; height: 40px; ">  
@@ -47,6 +49,27 @@
 				</div>
 			</div>
 			
+			<!-- 찜하기 -->
+			<div id="pick" >
+				<!-- 없음, pickCheck테이블 검사해서 해당 보드넘버와 멤버넘버가 없으면 눌렀을 때 정보 받아서 insert -->
+				<c:if test="${pickCheck eq null}">
+				<!--  pickNum=${selectPick.pickNum }&-->
+					<a href="/pickClick?boardNum=${read.boardNum }&memberNum=${memberVo.memberNum }" >
+						<img alt="" src="resources/img/pick_basic_white.png" class=""
+										style="width: 40px; height: 40px; object-fit: cover;">
+					</a>
+				</c:if>
+				
+				<!-- 있음, pickCheck테이블 검사해서 해당 보드넘버와 멤버넘버가 있으면 눌렀을 때 정보 받아서 delete -->
+				<c:if test="${pickCheck ne null}">
+					<a href="/pickClick?pickNum=${pickCheck.pickNum }&boardNum=${read.boardNum }&memberNum=${memberVo.memberNum }" >
+						<img alt="" src="resources/img/pick_basic_dark.png" class=""
+											style="width: 40px; height: 40px; object-fit: cover;">
+					</a>
+				</c:if>
+			</div>
+			
+			<!-- 게시글 사진 (슬라이드(script는 아래, CSS는 resources에 ) -->
 			<div id="wrapper">
 		      <div id="slider-wrap">
 		          <ul id="slider"  style="padding-left: 0;">
@@ -79,28 +102,26 @@
 		      </div>
 		   </div>
 			
-			
-			<!-- 찜하기 -->
-			
-			
-			<div id="pick" >
-				<!-- 없음, pickCheck테이블 검사해서 해당 보드넘버와 멤버넘버가 없으면 눌렀을 때 정보 받아서 insert -->
-				<c:if test="${pickCheck eq null}">
+			<!-- 좋아요 -->
+			<div id="like" >
+				<!-- 없음, tdlikeCheck 검사해서 해당 보드넘버와 멤버넘버가 없으면 눌렀을 때 정보 받아서 insert -->
+				<c:if test="${tdlikeCheck eq null}">
 				<!--  pickNum=${selectPick.pickNum }&-->
-					<a href="/pickClick?boardNum=${read.boardNum }&memberNum=${memberVo.memberNum }" >
-						<img alt="" src="resources/img/pick_basic_white.png" class=""
+					<a href="/likeClick?boardNum=${read.boardNum }&memberNum=${memberVo.memberNum }" >
+						<img alt="" src="resources/img/heart_empty.png" class=""
 										style="width: 40px; height: 40px; object-fit: cover;">
 					</a>
 				</c:if>
 				
-				<!-- 있음, pickCheck테이블 검사해서 해당 보드넘버와 멤버넘버가 있으면 눌렀을 때 정보 받아서 delete -->
-				<c:if test="${pickCheck ne null}">
-					<a href="/pickClick?pickNum=${pickCheck.pickNum }&boardNum=${read.boardNum }&memberNum=${memberVo.memberNum }" >
-						<img alt="" src="resources/img/pick_basic_dark.png" class=""
+				<!-- 있음, tdlikeCheck 검사해서 해당 보드넘버와 멤버넘버가 있으면 눌렀을 때 정보 받아서 delete -->
+				<c:if test="${tdlikeCheck ne null}">
+					<a href="/likeClick?pickNum=${tdlikeCheck.pickNum }&boardNum=${read.boardNum }&memberNum=${memberVo.memberNum }" >
+						<img alt="" src="resources/img/heart.png" class=""
 											style="width: 40px; height: 40px; object-fit: cover;">
 					</a>
 				</c:if>
 			</div>
+			
 			
 			<div>
 				태그
@@ -138,17 +159,17 @@
 				</form>
 			</div>
 			
-		<!-- 댓글 목록 -->
+			<!-- 댓글 목록 -->
 			<div >
 			<ol class="replyList">
 				<c:forEach items="${replyList}" var="replyList" varStatus="loop">
 				
 				${replyList.nickname}  
 				<fmt:formatDate value="${replyList.regdate}" pattern="yyyy-MM-dd HH:mm" />   
-               <a href="/replyUpdate?replyNum=${replyList.replyNum}&boardNum=${read.boardNum }&memberNum=${memberVo.memberNum }" >수정</a>  
+				<a href="/replyUpdate?replyNum=${replyList.replyNum}&boardNum=${read.boardNum }&memberNum=${memberVo.memberNum }" >수정</a>  
                
-               <!-- c:choose 예시  -->
-               <c:choose>
+				<!-- c:choose 예시 esle if 너낌? -->
+				<c:choose>
 					<c:when test="${memberVo.memberNum eq replyList.memberNum }">
 						<a href="/replyDelete?replyNum=${replyList.replyNum}&boardNum=${read.boardNum }&memberNum=${memberVo.memberNum }" onclick="alert('삭제 완료')">삭제</a><br>
 					</c:when>

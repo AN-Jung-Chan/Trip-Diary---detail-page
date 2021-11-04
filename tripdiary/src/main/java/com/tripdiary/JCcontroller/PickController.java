@@ -41,7 +41,7 @@ public class PickController {
 			PickVo pickCheck = service.pickCheck(pickVo);
 			model.addAttribute("pickCheck", pickCheck);
 			// 해당 회원의 memberNum으로 조회한 pick테이블을 List로 가져와서
-			// 리스트일때 통째로 비교할때 is empty
+			// 리스트일때 통째로 비교할때 is empty -- 공부해야함
 			if (pickCheck != null) {
 				// 안비어있으면 삭제
 				service.deletePick(pickVo);

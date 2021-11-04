@@ -16,7 +16,7 @@
 		<typeAlias type="com.tripdiary.JCvo.ReadVo" alias="readVo" />
 		<typeAlias type="com.tripdiary.JCvo.ReplyVo" alias="replyVo" />
 		<typeAlias type="com.tripdiary.JCvo.ReplyCommand" alias="replyCommand" />
-		<typeAlias type="com.tripdiary.JCvo.TdLikeVo" alias="tdLikeVo" />
+		<typeAlias type="com.tripdiary.JCvo.TdLikeVo" alias="tdlikeVo" />
 		<typeAlias type="com.tripdiary.JCvo.TagVo" alias="tagVo" />
 		<typeAlias type="com.tripdiary.JCvo.ProfileImgVo" alias="profileImgVo" />
 		<typeAlias type="com.tripdiary.JCvo.PickVo" alias="pickVo" />

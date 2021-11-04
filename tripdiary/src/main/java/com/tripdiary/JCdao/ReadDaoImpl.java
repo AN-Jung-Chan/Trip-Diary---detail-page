@@ -13,6 +13,7 @@ import com.tripdiary.JCvo.PickVo;
 import com.tripdiary.JCvo.ReadVo;
 import com.tripdiary.JCvo.ReplyCommand;
 import com.tripdiary.JCvo.ReplyVo;
+import com.tripdiary.JCvo.TdLikeVo;
 
 @Repository
 public class ReadDaoImpl implements ReadDao {
@@ -88,11 +89,6 @@ public class ReadDaoImpl implements ReadDao {
 		return sqlSession.selectList("readMapper.boardImgList", boardNum);
 	}
 
-	// 픽테이블 멤버번호로 조회
-	public PickVo selectPick(int pickNum) throws Exception {
-		return sqlSession.selectOne("readMapper.selectPick", pickNum);
-	}
-
 	// 픽 테이블 멤버넘,보드넘 조회
 	public PickVo pickCheck(PickVo pickVo) throws Exception {
 		return sqlSession.selectOne("readMapper.pickCheck", pickVo);
@@ -118,4 +114,31 @@ public class ReadDaoImpl implements ReadDao {
 			System.out.println("(readMapper.deletePick)실패");
 		}
 	}
+
+	// 좋아요 테이블 멤버넘,보드넘 조회
+	public TdLikeVo tdlikeCheck(TdLikeVo tdlikeVo) throws Exception {
+		return sqlSession.selectOne("readMapper.tdlikeCheck", tdlikeVo);
+	}
+
+	// 회원이 상세 게시글 확인 시 좋아요 테이블에 정보가 없다면 눌렀을 때 좋아요 테이블에 추가
+	public void insertTdlike(TdLikeVo tdlikeVo) throws Exception {
+
+		int result = sqlSession.insert("readMapper.insertTdlike", tdlikeVo);
+		if (result > 0) {
+			System.out.println("(readMapper.insertTdlike)성공");
+		} else {
+			System.out.println("(readMapper.insertTdlike)실패");
+		}
+	}
+
+	// 회원이 상세 게시글 확인 시 좋아요 테이블에 정보가 있다면 눌렀을 때 좋아요 테이블에 삭제
+	public void deleteTdlike(TdLikeVo tdlikeVo) throws Exception {
+		int result = sqlSession.delete("readMapper.deleteTdlike", tdlikeVo);
+		if (result > 0) {
+			System.out.println("(readMapper.deleteTdlike)성공");
+		} else {
+			System.out.println("(readMapper.deleteTdlike)실패");
+		}
+	}
+
 }

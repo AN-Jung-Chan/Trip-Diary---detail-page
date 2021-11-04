@@ -8,6 +8,7 @@ import com.tripdiary.JCvo.PickVo;
 import com.tripdiary.JCvo.ReadVo;
 import com.tripdiary.JCvo.ReplyCommand;
 import com.tripdiary.JCvo.ReplyVo;
+import com.tripdiary.JCvo.TdLikeVo;
 
 public interface ReadService {
 
@@ -44,9 +45,6 @@ public interface ReadService {
 	// 보드 이미지 목록
 	public List<BoardImgVo> BoardImgList(int boardNum) throws Exception;
 
-	// 픽테이블 멤버번호로 조회
-	public PickVo selectPick(int pickNum) throws Exception;
-
 	// 픽 테이블 멤버넘,보드넘 조회
 	public PickVo pickCheck(PickVo pickVo) throws Exception;
 
@@ -55,4 +53,13 @@ public interface ReadService {
 
 	// 회원이 상세 게시글 확인 시 pick테이블에 정보가 있다면 눌렀을 때 pick테이블에 삭제
 	public void deletePick(PickVo pickVo) throws Exception;
+
+	// 좋아요 테이블 멤버넘,보드넘 조회
+	public TdLikeVo tdlikeCheck(TdLikeVo tdlikeVo) throws Exception;
+
+	// 회원이 상세 게시글 확인 시 좋아요 테이블에 정보가 없다면 눌렀을 때 좋아요 테이블에 추가
+	public void insertTdlike(TdLikeVo tdlikeVo) throws Exception;
+
+	// 회원이 상세 게시글 확인 시 좋아요 테이블에 정보가 있다면 눌렀을 때 좋아요 테이블에 삭제
+	public void deleteTdlike(TdLikeVo tdlikeVo) throws Exception;
 }

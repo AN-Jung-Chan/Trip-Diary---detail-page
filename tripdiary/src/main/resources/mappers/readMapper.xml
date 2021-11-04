@@ -149,16 +149,8 @@
 	    A.board_num = B.board_num
 	    and A.board_num = #{boardNum}
 	</select>
-	
-	<!-- pick 테이블 멤버 번호로 조회 -->
-	<select id="selectPick" parameterType="int" resultType="pickVo">
-		select * from 
-		    pick
-		where 
-		    pick_num = #{pickNum}
-	</select>
 
-	<!-- pick 테이블 pickNumdm로 memberNum, boardNum 유무 확인 -->
+	<!-- pick 테이블  memberNum, boardNum 유무 확인 -->
 	<select id="pickCheck" resultType="pickVo">
 		select * from 
 		    pick
@@ -185,6 +177,38 @@
  			pick 
  		where 
  			pick_num = #{pickNum} 
+ 			and member_num = #{memberNum} 
+ 			and board_num = #{boardNum}
+ 	</delete>
+ 	
+ 	<!-- 좋아요 -->
+ 	
+ 	<!-- pick 테이블  memberNum, boardNum 유무 확인 -->
+	<select id="tdlikeCheck" resultType="tdlikeVo">
+		select * from 
+		    td_like
+		where
+			member_num = #{memberNum}
+		    and board_num = #{boardNum}
+	</select>
+
+
+	<!-- 찜하기 눌렀을 때 테이블에 존재하지 않을 경우 insert -->
+ 	<insert id="insertTdlike">
+ 		insert into 
+ 			td_like 
+ 		values 
+ 		  (	td_like_seq.nextval, 
+ 			#{memberNum}, 
+ 			#{boardNum} )
+ 	</insert>
+ 	
+ 	<!-- 찜하기 눌렀을 때 테이블에 존재할 경우 delete -->
+ 	<delete id="deleteTdlike" parameterType="tdlikeVo">
+ 		delete from 
+ 			td_like 
+ 		where 
+ 			td_like_num = #{tdlikeNum} 
  			and member_num = #{memberNum} 
  			and board_num = #{boardNum}
  	</delete>
