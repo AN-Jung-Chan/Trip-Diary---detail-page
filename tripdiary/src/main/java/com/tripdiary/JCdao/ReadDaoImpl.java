@@ -7,12 +7,15 @@ import javax.inject.Inject;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
+import com.tripdiary.JCcontroller.MemberActCntCmd;
+import com.tripdiary.JCcontroller.ReadViewCmd;
 import com.tripdiary.JCvo.BoardImgVo;
 import com.tripdiary.JCvo.MemberVo;
 import com.tripdiary.JCvo.PickVo;
 import com.tripdiary.JCvo.ReadVo;
 import com.tripdiary.JCvo.ReplyCommand;
 import com.tripdiary.JCvo.ReplyVo;
+import com.tripdiary.JCvo.TagVo;
 import com.tripdiary.JCvo.TdLikeVo;
 
 @Repository
@@ -80,21 +83,25 @@ public class ReadDaoImpl implements ReadDao {
 	}
 
 	// 선택된 댓글 조회
+	@Override
 	public ReplyVo selectReply(int replyNum) throws Exception {
 		return sqlSession.selectOne("readMapper.selectReply", replyNum);
 	}
 
 	// 보드 이미지 목록
+	@Override
 	public List<BoardImgVo> BoardImgList(int boardNum) throws Exception {
 		return sqlSession.selectList("readMapper.boardImgList", boardNum);
 	}
 
 	// 픽 테이블 멤버넘,보드넘 조회
+	@Override
 	public PickVo pickCheck(PickVo pickVo) throws Exception {
 		return sqlSession.selectOne("readMapper.pickCheck", pickVo);
 	}
 
 	// 회원이 찜하기를 누르지 않은 상태라면 해당 게시물에서 찜하기 추가
+	@Override
 	public void insertPick(PickVo pickVo) throws Exception {
 
 		int result = sqlSession.insert("readMapper.insertPick", pickVo);
@@ -106,6 +113,7 @@ public class ReadDaoImpl implements ReadDao {
 	}
 
 	// 회원이 상세 게시글 확인 시 pick테이블에 정보가 있다면 눌렀을 때 pick테이블에 삭제
+	@Override
 	public void deletePick(PickVo pickVo) throws Exception {
 		int result = sqlSession.delete("readMapper.deletePick", pickVo);
 		if (result > 0) {
@@ -116,11 +124,13 @@ public class ReadDaoImpl implements ReadDao {
 	}
 
 	// 좋아요 테이블 멤버넘,보드넘 조회
+	@Override
 	public TdLikeVo tdLikeCheck(TdLikeVo tdLikeVo) throws Exception {
 		return sqlSession.selectOne("readMapper.tdLikeCheck", tdLikeVo);
 	}
 
 	// 회원이 상세 게시글 확인 시 좋아요 테이블에 정보가 없다면 눌렀을 때 좋아요 테이블에 추가
+	@Override
 	public void insertTdlike(TdLikeVo tdLikeVo) throws Exception {
 
 		int result = sqlSession.insert("readMapper.insertTdlike", tdLikeVo);
@@ -132,6 +142,7 @@ public class ReadDaoImpl implements ReadDao {
 	}
 
 	// 회원이 상세 게시글 확인 시 좋아요 테이블에 정보가 있다면 눌렀을 때 좋아요 테이블에 삭제
+	@Override
 	public void deleteTdlike(TdLikeVo tdLikeVo) throws Exception {
 		int result = sqlSession.delete("readMapper.deleteTdlike", tdLikeVo);
 		if (result > 0) {
@@ -139,6 +150,46 @@ public class ReadDaoImpl implements ReadDao {
 		} else {
 			System.out.println("(readMapper.deleteTdlike)실패");
 		}
+	}
+
+	// 태그 목록
+	@Override
+	public List<TagVo> tagList(int boardNum) throws Exception {
+		return sqlSession.selectList("readMapper.tagList", boardNum);
+	}
+
+	// 카운팅
+	@Override
+	public void boardTotalLike(ReadViewCmd readViewCmd) throws Exception {
+		sqlSession.update("readMapper.boardTotalLike", readViewCmd);
+	}
+
+	// 해당 멤버의 활동 카운팅
+	@Override
+	public void memberActCntCmd(MemberActCntCmd memberActCntCmd) throws Exception {
+		int result = sqlSession.update("readMapper.memberActCntCmd", memberActCntCmd);
+		if (result > 0) {
+			System.out.println("memberActCntCmd : update 성공");
+		} else {
+			System.out.println("memberActCntCmd : update 실패");
+		}
+	}
+
+	// 해당 멤버의 댓글 총갯수
+	@Override
+	public void replyActCnt(MemberActCntCmd memberActCntCmd) throws Exception {
+		int result = sqlSession.update("readMapper.replyActCnt", memberActCntCmd);
+		if (result > 0) {
+			System.out.println("replyActCnt, memberActCntCmd : update 성공");
+		} else {
+			System.out.println("replyActCnt, memberActCntCmd : update 실패");
+		}
+	}
+
+	// 멤버가 좋아요 받은 총 개수 
+	@Override
+	public void memberLikeReceiveCnt(MemberActCntCmd memberActCntCmd) throws Exception {
+		sqlSession.update("readMapper.memberLikeReceiveCnt", memberActCntCmd);
 	}
 
 }

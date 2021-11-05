@@ -6,6 +6,8 @@ import javax.inject.Inject;
 
 import org.springframework.stereotype.Repository;
 
+import com.tripdiary.JCcontroller.MemberActCntCmd;
+import com.tripdiary.JCcontroller.ReadViewCmd;
 import com.tripdiary.JCdao.ReadDao;
 import com.tripdiary.JCvo.BoardImgVo;
 import com.tripdiary.JCvo.MemberVo;
@@ -13,6 +15,7 @@ import com.tripdiary.JCvo.PickVo;
 import com.tripdiary.JCvo.ReadVo;
 import com.tripdiary.JCvo.ReplyCommand;
 import com.tripdiary.JCvo.ReplyVo;
+import com.tripdiary.JCvo.TagVo;
 import com.tripdiary.JCvo.TdLikeVo;
 
 @Repository
@@ -76,43 +79,80 @@ public class ReadServiceImpl implements ReadService {
 	}
 
 	// 선택된 댓글 조회
+	@Override
 	public ReplyVo selectReply(int replyNum) throws Exception {
 		return dao.selectReply(replyNum);
 	}
 
 	// 보드 이미지 목록
+	@Override
 	public List<BoardImgVo> BoardImgList(int boardNum) throws Exception {
 		return dao.BoardImgList(boardNum);
 	}
 
 	// 픽 테이블 멤버넘,보드넘 조회
+	@Override
 	public PickVo pickCheck(PickVo pickVo) throws Exception {
 		return dao.pickCheck(pickVo);
 	}
 
 	// 회원이 찜하기를 누르지 않은 상태라면 해당 게시물에서 찜하기 추가
+	@Override
 	public void insertPick(PickVo pickVo) throws Exception {
 		dao.insertPick(pickVo);
 	}
 
 	// 회원이 상세 게시글 확인 시 pick테이블에 정보가 있다면 눌렀을 때 pick테이블에 삭제
+	@Override
 	public void deletePick(PickVo pickVo) throws Exception {
 		dao.deletePick(pickVo);
 	}
 
 	// 좋아요 테이블 멤버넘,보드넘 조회
+	@Override
 	public TdLikeVo tdLikeCheck(TdLikeVo tdLikeVo) throws Exception {
 		return dao.tdLikeCheck(tdLikeVo);
 	}
 
 	// 회원이 상세 게시글 확인 시 좋아요 테이블에 정보가 없다면 눌렀을 때 좋아요 테이블에 추가
+	@Override
 	public void insertTdlike(TdLikeVo tdLikeVo) throws Exception {
 		dao.insertTdlike(tdLikeVo);
 	}
 
 	// 회원이 상세 게시글 확인 시 좋아요 테이블에 정보가 있다면 눌렀을 때 좋아요 테이블에 삭제
+	@Override
 	public void deleteTdlike(TdLikeVo tdLikeVo) throws Exception {
 		dao.deleteTdlike(tdLikeVo);
 	}
 
+	// 태그 목록
+	@Override
+	public List<TagVo> tagList(int boardNum) throws Exception {
+		return dao.tagList(boardNum);
+	}
+
+	// 카운팅
+	@Override
+	public void boardTotalLike(ReadViewCmd readViewCmd) throws Exception {
+		dao.boardTotalLike(readViewCmd);
+	}
+
+	// 해당 멤버의 활동 카운팅
+	@Override
+	public void memberActCntCmd(MemberActCntCmd memberActCntCmd) throws Exception {
+		dao.memberActCntCmd(memberActCntCmd);
+	}
+
+	// 해당 멤버의 댓글 총갯수
+	@Override
+	public void replyActCnt(MemberActCntCmd memberActCntCmd) throws Exception {
+		dao.replyActCnt(memberActCntCmd);
+	}
+
+	// 멤버가 좋아요 받은 총 개수
+	@Override
+	public void memberLikeReceiveCnt(MemberActCntCmd memberActCntCmd) throws Exception {
+		dao.memberLikeReceiveCnt(memberActCntCmd);
+	}
 }

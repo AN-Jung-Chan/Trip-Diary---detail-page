@@ -2,12 +2,15 @@ package com.tripdiary.JCservice;
 
 import java.util.List;
 
+import com.tripdiary.JCcontroller.MemberActCntCmd;
+import com.tripdiary.JCcontroller.ReadViewCmd;
 import com.tripdiary.JCvo.BoardImgVo;
 import com.tripdiary.JCvo.MemberVo;
 import com.tripdiary.JCvo.PickVo;
 import com.tripdiary.JCvo.ReadVo;
 import com.tripdiary.JCvo.ReplyCommand;
 import com.tripdiary.JCvo.ReplyVo;
+import com.tripdiary.JCvo.TagVo;
 import com.tripdiary.JCvo.TdLikeVo;
 
 public interface ReadService {
@@ -62,4 +65,19 @@ public interface ReadService {
 
 	// 회원이 상세 게시글 확인 시 좋아요 테이블에 정보가 있다면 눌렀을 때 좋아요 테이블에 삭제
 	public void deleteTdlike(TdLikeVo tdLikeVo) throws Exception;
+
+	// 태그 목록
+	public List<TagVo> tagList(int boardNum) throws Exception;
+
+	// 카운팅
+	public void boardTotalLike(ReadViewCmd readViewCmd) throws Exception;
+
+	// 해당 멤버의 활동 카운팅
+	public void memberActCntCmd(MemberActCntCmd memberActCntCmd) throws Exception;
+
+	// 해당 멤버의 댓글 총갯수
+	public void replyActCnt(MemberActCntCmd memberActCntCmd) throws Exception;
+
+	// 멤버가 좋아요 받은 총 개수
+	public void memberLikeReceiveCnt(MemberActCntCmd memberActCntCmd) throws Exception;
 }

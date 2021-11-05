@@ -152,6 +152,14 @@
 		A.board_num = B.board_num
 		and A.board_num = #{boardNum}
 	</select>
+	
+	<!-- 태그 -->
+	<select id="tagList" parameterType="int" resultType="tagVo" >
+		select * from
+			tag
+		where 
+			board_num = #{boardNum}
+	</select>
 
 	<!-- pick 테이블 memberNum, boardNum 유무 확인 -->
 	<select id="pickCheck" resultType="pickVo">
@@ -217,21 +225,69 @@
 		and board_num = #{boardNum}
 	</delete>
 
-	<!-- pick눌렀을 때 member_act_cnt 업데이트
- 	<update id="memberActCntPick">
- 		update member_act_cnt set PICK_PRESS_CNT =
+	<!-- pick눌렀을 때 board td_like_cnt 카운팅 업데이트-->
+ 	<update id="boardTotalLike" parameterType="com.tripdiary.JCcontroller.ReadViewCmd">
+ 		update board set td_like_cnt = 
  		<choose>
  			<when test='updateType.equals("insert")'>
-		 		 PICK_PRESS_CNT+1 where member_num = #{memberNum}
+		 		 td_like_cnt +1 where board_num = #{boardNum} and member_num = #{memberNum}
  			</when>
  			<when test='updateType.equals("delete")'>
-		 		 PICK_PRESS_CNT-1 where member_num = #{memberNum}
+		 		 td_like_cnt -1 where board_num = #{boardNum} and member_num = #{memberNum}
  			</when>
  		</choose>
- 	</update>-->
+ 	</update>
 
+	<!-- 로그인 한 멤버가 누른것들 -->
+	<update id = "memberActCntCmd" parameterType="com.tripdiary.JCcontroller.MemberActCntCmd">
+		update member_act_cnt set 
+		<choose>
+			<!-- 찜하기 누른 카운팅 -->
+			<when test='memberAct.equals("pick") and updateType.equals("insert")'>
+             	pick_press_cnt = pick_press_cnt +1 where member_num = #{loginMemberNum}
+			</when>
+			<when test='memberAct.equals("pick") and updateType.equals("delete")'>
+             	pick_press_cnt = pick_press_cnt -1 where member_num = #{loginMemberNum}
+			</when>
+			
+			<!-- 좋아요 누른 카운팅 -->
+			<when test='memberAct.equals("like") and updateType.equals("insert")'>
+				td_like_press_cnt = td_like_press_cnt +1 where member_num = #{loginMemberNum}
+			</when>
+			<when test='memberAct.equals("like") and updateType.equals("delete")'>
+				td_like_press_cnt = td_like_press_cnt -1 where member_num = #{loginMemberNum}
+			</when>
+		</choose>
+     </update>
 
-
+	<!-- 로그인한 멤버가 댓글 단 횟수  -->
+	<update id = "replyActCnt" parameterType="com.tripdiary.JCcontroller.MemberActCntCmd">
+		update member_act_cnt set 
+		<choose>
+			<!-- 댓글 작성/삭제 카운팅 -->
+			<when test='memberAct.equals("reply") and updateType.equals("insert")'>
+             	reply_write_cnt = reply_write_cnt +1 where member_num = #{loginMemberNum}
+			</when>
+			<when test='memberAct.equals("reply") and updateType.equals("delete")'>
+             	reply_write_cnt = reply_write_cnt -1 where member_num = #{loginMemberNum}
+			</when>
+		</choose>
+     </update>
+     
+     <!-- 게시글 작성 멤버가 좋아요 받은 총횟수 -->
+	<update id = "memberLikeReceiveCnt" parameterType="com.tripdiary.JCcontroller.MemberActCntCmd">
+		update member_act_cnt set
+		<choose> 
+			<!-- 좋아요 받은 후 카운팅 -->
+			<when test='memberAct.equals("like") and updateType.equals("insert")'>
+             	td_like_receive_cnt = td_like_receive_cnt +1 where member_num = #{boardMemberNum}
+			</when>
+			<when test='memberAct.equals("like") and updateType.equals("delete")'>
+             	td_like_receive_cnt = td_like_receive_cnt -1 where member_num = #{boardMemberNum}
+			</when>
+			
+		</choose>
+     </update>
 
 
 

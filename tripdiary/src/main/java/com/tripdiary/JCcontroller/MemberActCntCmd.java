@@ -1,23 +1,22 @@
 package com.tripdiary.JCcontroller;
 
-public class MemberCntCmd {
+public class MemberActCntCmd {
 	private int boardNum; // 게시글 번호
 	private int boardMemberNum; // 게시글 쓴 회원
 	private int loginMemberNum; // 로그인 한 회원
-	private String memberAct; // 픽이랑 라이크 둘중하나 받음
+	private String memberAct; // 해당 활동 EX)pick, like, reply 등
 	private String updateType; // insert delete
 
-	public MemberCntCmd() {
+	public MemberActCntCmd() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public MemberCntCmd(int boardNum, int boardMemberNum, int loginMemberNum, String memberAct, String updateType) {
+	public MemberActCntCmd(int boardNum, int boardMemberNum, int loginMemberNum, String memberAct) {
 		super();
 		this.boardNum = boardNum;
 		this.boardMemberNum = boardMemberNum;
 		this.loginMemberNum = loginMemberNum;
 		this.memberAct = memberAct;
-		this.updateType = updateType;
 	}
 
 	protected int getBoardNum() {

@@ -19,6 +19,7 @@ import com.tripdiary.JCvo.PickVo;
 import com.tripdiary.JCvo.ReadVo;
 import com.tripdiary.JCvo.ReplyCommand;
 import com.tripdiary.JCvo.ReplyVo;
+import com.tripdiary.JCvo.TagVo;
 import com.tripdiary.JCvo.TdLikeVo;
 
 @Controller
@@ -106,6 +107,11 @@ public class ReadController {
 		System.out.println(boardImgList.toString());
 		model.addAttribute("boardImgList", boardImgList);
 
+		// 태그
+		List<TagVo> tagList = service.tagList(read.getBoardNum());
+		System.out.println("tagList : " + tagList.toString());
+		model.addAttribute("tagList", tagList);
+
 		// 찜 회원 확인
 		PickVo pickVo = new PickVo(memberVo.getMemberNum(), readCmd.getBoardNum());
 		System.out.println("pickVo : " + pickVo.toString());
@@ -139,11 +145,13 @@ public class ReadController {
 
 	// 댓글 작성
 	@RequestMapping(value = "/replyWrite", method = RequestMethod.POST)
-	public String replyWrite(ReplyVo replyVo, Model model, int boardNum, HttpSession session) throws Exception {
+	public String replyWrite(ReplyVo replyVo, ReadViewCmd readCmd, Model model, HttpSession session) throws Exception {
 		logger.info("reply Write");
 
+		System.out.println("작성하고 난 후 : " + readCmd.toString());
+
 		// hidden에 들어가는거 - 삭제해야하나??
-		ReadVo read = service.read(boardNum);
+		ReadVo read = service.read(readCmd.getBoardNum());
 		System.out.println(read.toString());
 		model.addAttribute("read", read);
 
@@ -152,20 +160,28 @@ public class ReadController {
 		System.out.println("replyWrite(memberVo) : " + memberVo.toString());
 		model.addAttribute("memberVo", memberVo);
 
+		MemberActCntCmd memberActCntCmd = new MemberActCntCmd(readCmd.getBoardNum(), readCmd.getMemberNum(),
+				memberVo.getMemberNum(), "reply");
+
 		// 작성
 		service.replyWrite(replyVo);
 		System.out.println(replyVo.toString());
 
+		memberActCntCmd.setUpdateType("insert");
+		service.replyActCnt(memberActCntCmd);
+		System.out.println("reply :memberActCntCmd.insert : " + memberActCntCmd.toString());
+		
 		return "redirect:/readView?boardNum=" + replyVo.getBoardNum();
 	}
 
 	// 댓글 수정 GET
 	@RequestMapping(value = "/replyUpdate", method = RequestMethod.GET)
-	public String getReplyUpdate(ReplyVo replyVo, Model model, int boardNum, HttpSession session) throws Exception {
+	public String getReplyUpdate(ReplyVo replyVo, Model model, ReadViewCmd readCmd, HttpSession session)
+			throws Exception {
 		logger.info("reply Update");
 
 		// hidden에 들어가는거 - 삭제해야하나??
-		ReadVo read = service.read(boardNum);
+		ReadVo read = service.read(readCmd.getBoardNum());
 		System.out.println(read.toString());
 		model.addAttribute("read", read);
 
@@ -186,11 +202,13 @@ public class ReadController {
 
 	// 댓글 수정 POST
 	@RequestMapping(value = "/replyUpdate", method = RequestMethod.POST)
-	public String replyUpdate(ReplyVo replyVo, Model model, int boardNum, HttpSession session) throws Exception {
+	public String replyUpdate(ReplyVo replyVo, Model model, ReadViewCmd readCmd, HttpSession session) throws Exception {
 		logger.info("reply Update");
+
 		System.out.println("replyUpdate,ㄷㄹㅇ");
+
 		// hidden에 들어가는거 - 삭제해야하나??
-		ReadVo read = service.read(boardNum);
+		ReadVo read = service.read(readCmd.getBoardNum());
 		System.out.println(read.toString());
 		model.addAttribute("read", read);
 
@@ -208,11 +226,13 @@ public class ReadController {
 
 	// 댓글 삭제 POST
 	@RequestMapping(value = "/replyDelete", method = RequestMethod.GET)
-	public String replyDelete(ReplyVo replyVo, Model model, int boardNum, HttpSession session) throws Exception {
+	public String replyDelete(ReplyVo replyVo, Model model, ReadViewCmd readCmd, HttpSession session) throws Exception {
 		logger.info("reply Delete");
+
 		System.out.println("replyDelete 들어왔다");
+
 		// hidden에 들어가는거 - 삭제해야하나??
-		ReadVo read = service.read(boardNum);
+		ReadVo read = service.read(readCmd.getBoardNum());
 		System.out.println(read.toString());
 		model.addAttribute("read", read);
 
@@ -221,9 +241,17 @@ public class ReadController {
 		System.out.println(memberVo.toString());
 		model.addAttribute("memberVo", memberVo);
 
+		MemberActCntCmd memberActCntCmd = new MemberActCntCmd(readCmd.getBoardNum(), readCmd.getMemberNum(),
+				memberVo.getMemberNum(), "reply");
+
 		// 댓글 삭제 업데이트
 		service.replyDelete(replyVo);
 		System.out.println(replyVo.toString());
+
+		memberActCntCmd.setUpdateType("delete");
+		System.out.println("reply : memberActCntCmd.insert : " + memberActCntCmd.toString());
+
+		service.replyActCnt(memberActCntCmd);
 
 		return "redirect:/readView?boardNum=" + replyVo.getBoardNum();
 	}

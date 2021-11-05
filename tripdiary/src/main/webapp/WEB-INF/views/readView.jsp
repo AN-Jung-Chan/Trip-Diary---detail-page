@@ -125,7 +125,11 @@
 			
 			
 			<div>
-				태그
+				<c:if test="${tagList ne null}">
+					<c:forEach items="${tagList}" var="tagList" varStatus="loop">
+						#${tagList.tag} &nbsp;
+					</c:forEach>
+				</c:if>	
 			</div>
 			
 			<div>
