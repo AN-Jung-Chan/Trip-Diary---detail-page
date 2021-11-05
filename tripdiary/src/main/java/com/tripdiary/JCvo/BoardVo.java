@@ -10,21 +10,22 @@ public class BoardVo {
 	private String content;
 	private Timestamp regdate;
 	private Date tripdate;
-	private int tdLiktCnt;
+	private int tdLikeCnt;
 
 	public BoardVo() {
 
 	}
 
 	public BoardVo(int boardNum, int memberNum, String place, String content, Timestamp regdate, Date tripdate,
-			int tdLiktCnt) {
+			int tdLikeCnt) {
+		super();
 		this.boardNum = boardNum;
 		this.memberNum = memberNum;
 		this.place = place;
 		this.content = content;
 		this.regdate = regdate;
 		this.tripdate = tripdate;
-		this.tdLiktCnt = tdLiktCnt;
+		this.tdLikeCnt = tdLikeCnt;
 	}
 
 	public int getBoardNum() {
@@ -75,18 +76,20 @@ public class BoardVo {
 		this.tripdate = tripdate;
 	}
 
-	public int getTdLiktCnt() {
-		return tdLiktCnt;
+	public int getTdLikeCnt() {
+		return tdLikeCnt;
 	}
 
-	public void setTdLiktCnt(int tdLiktCnt) {
-		this.tdLiktCnt = tdLiktCnt;
+	public void setTdLikeCnt(int tdLikeCnt) {
+		this.tdLikeCnt = tdLikeCnt;
 	}
 
 	@Override
 	public String toString() {
 		return "BoardVo [boardNum=" + boardNum + ", memberNum=" + memberNum + ", place=" + place + ", content="
-				+ content + ", regdate=" + regdate + ", tripdate=" + tripdate + ", tdLiktCnt=" + tdLiktCnt + "]";
+				+ content + ", regdate=" + regdate + ", tripdate=" + tripdate + ", tdLikeCnt=" + tdLikeCnt + "]";
 	}
+
+	
 
 }

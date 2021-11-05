@@ -121,18 +121,18 @@ public class ReadController {
 		model.addAttribute("pickCheck", pickCheck);
 
 		// 좋아요 회원 확인
-		TdLikeVo tdlikeVo = new TdLikeVo(memberVo.getMemberNum(), readCmd.getBoardNum());
-		System.out.println("tdlikeVo : " + tdlikeVo.toString());
+		TdLikeVo tdLikeVo = new TdLikeVo(memberVo.getMemberNum(), readCmd.getBoardNum());
+		System.out.println("tdLikeVo : " + tdLikeVo.toString());
 
-		TdLikeVo tdlikeCheck = service.tdlikeCheck(tdlikeVo);
+		TdLikeVo tdLikeCheck = service.tdLikeCheck(tdLikeVo);
 
-		if (tdlikeCheck == null) {
-			System.out.println("tdlikeCheck 없음");
+		if (tdLikeCheck == null) {
+			System.out.println("tdLikeCheck 없음");
 		} else {
-			System.out.println("tdlikeCheck : " + tdlikeCheck.toString());
+			System.out.println("tdLikeCheck : " + tdLikeCheck.toString());
 		}
 
-		model.addAttribute("tdlikeCheck", tdlikeCheck);
+		model.addAttribute("tdLikeCheck", tdLikeCheck);
 
 		return "readView";
 	}

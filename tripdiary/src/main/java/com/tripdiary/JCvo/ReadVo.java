@@ -10,7 +10,7 @@ public class ReadVo {
 	private String content;
 	private Timestamp regdate;
 	private Date tripdate;
-	private int tdLiktCnt;
+	private int tdLikeCnt;
 	private String profileOrgFileName;
 	private String profileStoreFileName;
 	private String profileFileType;
@@ -20,7 +20,7 @@ public class ReadVo {
 	}
 
 	public ReadVo(int boardNum, int memberNum, String nickname, String content, Timestamp regdate, Date tripdate,
-			int tdLiktCnt, String profileOrgFileName, String profileStoreFileName, String profileFileType) {
+			int tdLikeCnt, String profileOrgFileName, String profileStoreFileName, String profileFileType) {
 		super();
 		this.boardNum = boardNum;
 		this.memberNum = memberNum;
@@ -28,7 +28,7 @@ public class ReadVo {
 		this.content = content;
 		this.regdate = regdate;
 		this.tripdate = tripdate;
-		this.tdLiktCnt = tdLiktCnt;
+		this.tdLikeCnt = tdLikeCnt;
 		this.profileOrgFileName = profileOrgFileName;
 		this.profileStoreFileName = profileStoreFileName;
 		this.profileFileType = profileFileType;
@@ -82,12 +82,12 @@ public class ReadVo {
 		this.tripdate = tripdate;
 	}
 
-	public int getTdLiktCnt() {
-		return tdLiktCnt;
+	public int getTdLikeCnt() {
+		return tdLikeCnt;
 	}
 
-	public void setTdLiktCnt(int tdLiktCnt) {
-		this.tdLiktCnt = tdLiktCnt;
+	public void setTdLikeCnt(int tdLikeCnt) {
+		this.tdLikeCnt = tdLikeCnt;
 	}
 
 	public String getProfileOrgFileName() {
@@ -117,7 +117,7 @@ public class ReadVo {
 	@Override
 	public String toString() {
 		return "ReadVo [boardNum=" + boardNum + ", memberNum=" + memberNum + ", nickname=" + nickname + ", content="
-				+ content + ", regdate=" + regdate + ", tripdate=" + tripdate + ", tdLiktCnt=" + tdLiktCnt
+				+ content + ", regdate=" + regdate + ", tripdate=" + tripdate + ", tdLikeCnt=" + tdLikeCnt
 				+ ", profileOrgFileName=" + profileOrgFileName + ", profileStoreFileName=" + profileStoreFileName
 				+ ", profileFileType=" + profileFileType + "]";
 	}

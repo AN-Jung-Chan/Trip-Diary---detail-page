@@ -37,16 +37,16 @@ public class TdLikeController {
 	if (memberVo != null) {
 		System.out.println(memberVo.toString() + "이게 언제 뽑히냐");
 
-		TdLikeVo tdlikeCheck = service.tdlikeCheck(tdlikeVo);
-		model.addAttribute("tdlikeCheck", tdlikeCheck);
+		TdLikeVo tdLikeCheck = service.tdLikeCheck(tdlikeVo);
+		model.addAttribute("tdLikeCheck", tdLikeCheck);
 		// 해당 회원의 memberNum으로 조회한 pick테이블을 List로 가져와서
 		// 리스트일때 통째로 비교할때 is empty -- 공부해야함
-		if (tdlikeCheck != null) {
+		if (tdLikeCheck != null) {
 			// 안비어있으면 삭제
 			service.deleteTdlike(tdlikeVo);
 			System.out.println("삭제 후 readCmd(당연히 없겠찌..) : " + readCmd);
-			System.out.println("delete : " + tdlikeCheck.toString());
-			url =  "redirect:/readView?boardNum=" + tdlikeCheck.getBoardNum() + "&memberNum=" + tdlikeCheck.getMemberNum();
+			System.out.println("delete : " + tdLikeCheck.toString());
+			url =  "redirect:/readView?boardNum=" + tdLikeCheck.getBoardNum() + "&memberNum=" + tdLikeCheck.getMemberNum();
 		} else {
 			// 비어있으면 insert
 			service.insertTdlike(tdlikeVo);

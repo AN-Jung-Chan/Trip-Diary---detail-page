@@ -14,7 +14,8 @@ public class ReplyCommand {
 		// TODO Auto-generated constructor stub
 	}
 
-	public ReplyCommand(int replyNum, int boardNum, int memberNum, String content, Timestamp regdate, String nickname) {
+	public ReplyCommand(Integer replyNum, int boardNum, int memberNum, String content, Timestamp regdate,
+			String nickname) {
 		super();
 		this.replyNum = replyNum;
 		this.boardNum = boardNum;
@@ -24,11 +25,11 @@ public class ReplyCommand {
 		this.nickname = nickname;
 	}
 
-	public int getReplyNum() {
+	public Integer getReplyNum() {
 		return replyNum;
 	}
 
-	public void setReplyNum(int replyNum) {
+	public void setReplyNum(Integer replyNum) {
 		this.replyNum = replyNum;
 	}
 

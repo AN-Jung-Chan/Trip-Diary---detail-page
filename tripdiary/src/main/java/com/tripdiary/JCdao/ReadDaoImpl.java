@@ -116,14 +116,14 @@ public class ReadDaoImpl implements ReadDao {
 	}
 
 	// 좋아요 테이블 멤버넘,보드넘 조회
-	public TdLikeVo tdlikeCheck(TdLikeVo tdlikeVo) throws Exception {
-		return sqlSession.selectOne("readMapper.tdlikeCheck", tdlikeVo);
+	public TdLikeVo tdLikeCheck(TdLikeVo tdLikeVo) throws Exception {
+		return sqlSession.selectOne("readMapper.tdLikeCheck", tdLikeVo);
 	}
 
 	// 회원이 상세 게시글 확인 시 좋아요 테이블에 정보가 없다면 눌렀을 때 좋아요 테이블에 추가
-	public void insertTdlike(TdLikeVo tdlikeVo) throws Exception {
+	public void insertTdlike(TdLikeVo tdLikeVo) throws Exception {
 
-		int result = sqlSession.insert("readMapper.insertTdlike", tdlikeVo);
+		int result = sqlSession.insert("readMapper.insertTdlike", tdLikeVo);
 		if (result > 0) {
 			System.out.println("(readMapper.insertTdlike)성공");
 		} else {
@@ -132,8 +132,8 @@ public class ReadDaoImpl implements ReadDao {
 	}
 
 	// 회원이 상세 게시글 확인 시 좋아요 테이블에 정보가 있다면 눌렀을 때 좋아요 테이블에 삭제
-	public void deleteTdlike(TdLikeVo tdlikeVo) throws Exception {
-		int result = sqlSession.delete("readMapper.deleteTdlike", tdlikeVo);
+	public void deleteTdlike(TdLikeVo tdLikeVo) throws Exception {
+		int result = sqlSession.delete("readMapper.deleteTdlike", tdLikeVo);
 		if (result > 0) {
 			System.out.println("(readMapper.deleteTdlike)성공");
 		} else {

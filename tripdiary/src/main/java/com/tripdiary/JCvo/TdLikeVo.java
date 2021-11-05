@@ -1,11 +1,12 @@
 package com.tripdiary.JCvo;
 
 public class TdLikeVo {
-	private int tdlikeNum;
+	private int tdLikeNum;
 	private int memberNum;
 	private int boardNum;
 
 	public TdLikeVo() {
+		// TODO Auto-generated constructor stub
 	}
 
 	public TdLikeVo(int memberNum, int boardNum) {
@@ -14,12 +15,12 @@ public class TdLikeVo {
 		this.boardNum = boardNum;
 	}
 
-	public int getTdlikeNum() {
-		return tdlikeNum;
+	public int getTdLikeNum() {
+		return tdLikeNum;
 	}
 
-	public void setTdlikeNum(int tdlikeNum) {
-		this.tdlikeNum = tdlikeNum;
+	public void setTdLikeNum(int tdLikeNum) {
+		this.tdLikeNum = tdLikeNum;
 	}
 
 	public int getMemberNum() {
@@ -40,7 +41,12 @@ public class TdLikeVo {
 
 	@Override
 	public String toString() {
-		return "TdLike [tdlikeNum=" + tdlikeNum + ", memberNum=" + memberNum + ", boardNum=" + boardNum + "]";
+		return "TdLikeVo [tdLikeNum=" + tdLikeNum + ", memberNum=" + memberNum + ", boardNum=" + boardNum + "]";
 	}
+	
+	
+	
+
+	
 
 }

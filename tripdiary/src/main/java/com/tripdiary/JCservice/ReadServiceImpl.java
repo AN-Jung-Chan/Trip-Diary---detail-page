@@ -101,18 +101,18 @@ public class ReadServiceImpl implements ReadService {
 	}
 
 	// 좋아요 테이블 멤버넘,보드넘 조회
-	public TdLikeVo tdlikeCheck(TdLikeVo tdlikeVo) throws Exception {
-		return dao.tdlikeCheck(tdlikeVo);
+	public TdLikeVo tdLikeCheck(TdLikeVo tdLikeVo) throws Exception {
+		return dao.tdLikeCheck(tdLikeVo);
 	}
 
 	// 회원이 상세 게시글 확인 시 좋아요 테이블에 정보가 없다면 눌렀을 때 좋아요 테이블에 추가
-	public void insertTdlike(TdLikeVo tdlikeVo) throws Exception {
-		dao.insertTdlike(tdlikeVo);
+	public void insertTdlike(TdLikeVo tdLikeVo) throws Exception {
+		dao.insertTdlike(tdLikeVo);
 	}
 
 	// 회원이 상세 게시글 확인 시 좋아요 테이블에 정보가 있다면 눌렀을 때 좋아요 테이블에 삭제
-	public void deleteTdlike(TdLikeVo tdlikeVo) throws Exception {
-		dao.deleteTdlike(tdlikeVo);
+	public void deleteTdlike(TdLikeVo tdLikeVo) throws Exception {
+		dao.deleteTdlike(tdLikeVo);
 	}
 
 }

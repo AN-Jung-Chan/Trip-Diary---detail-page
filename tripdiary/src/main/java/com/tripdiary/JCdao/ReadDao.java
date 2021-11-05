@@ -55,12 +55,12 @@ public interface ReadDao {
 	public void deletePick(PickVo pickVo) throws Exception;
 
 	// 좋아요 테이블 멤버넘,보드넘 조회
-	public TdLikeVo tdlikeCheck(TdLikeVo tdlikeVo) throws Exception;
+	public TdLikeVo tdLikeCheck(TdLikeVo tdLikeVo) throws Exception;
 
 	// 회원이 상세 게시글 확인 시 좋아요 테이블에 정보가 없다면 눌렀을 때 좋아요 테이블에 추가
-	public void insertTdlike(TdLikeVo tdlikeVo) throws Exception;
+	public void insertTdlike(TdLikeVo tdLikeVo) throws Exception;
 
 	// 회원이 상세 게시글 확인 시 좋아요 테이블에 정보가 있다면 눌렀을 때 좋아요 테이블에 삭제
-	public void deleteTdlike(TdLikeVo tdlikeVo) throws Exception;
+	public void deleteTdlike(TdLikeVo tdLikeVo) throws Exception;
 
 }
