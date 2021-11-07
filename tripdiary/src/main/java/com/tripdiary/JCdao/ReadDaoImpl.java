@@ -8,7 +8,6 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import com.tripdiary.JCcontroller.MemberActCntCmd;
-import com.tripdiary.JCcontroller.ReadViewCmd;
 import com.tripdiary.JCvo.BoardImgVo;
 import com.tripdiary.JCvo.MemberVo;
 import com.tripdiary.JCvo.PickVo;
@@ -32,8 +31,8 @@ public class ReadDaoImpl implements ReadDao {
 
 	// 게시글 목록 조회 - 임시
 	@Override
-	public List<ReadVo> list() throws Exception {
-		return sqlSession.selectList("readMapper.list");
+	public List<ReadVo> list(ReadVo readVo) throws Exception {
+		return sqlSession.selectList("readMapper.list", readVo);
 	}
 
 	// 게시물 상세 보기 - 맡은 주 기능
@@ -160,8 +159,8 @@ public class ReadDaoImpl implements ReadDao {
 
 	// 카운팅
 	@Override
-	public void boardTotalLike(ReadViewCmd readViewCmd) throws Exception {
-		sqlSession.update("readMapper.boardTotalLike", readViewCmd);
+	public void boardTotalLike(MemberActCntCmd memberActCntCmd) throws Exception {
+		sqlSession.update("readMapper.boardTotalLike", memberActCntCmd);
 	}
 
 	// 해당 멤버의 활동 카운팅

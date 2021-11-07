@@ -48,7 +48,6 @@ public class TdLikeController {
 			if (tdLikeCheck != null) {
 				// 안비어있으면 삭제
 				service.deleteTdlike(tdlikeVo);
-				readCmd.setUpdateType("delete");
 				memberActCntCmd.setUpdateType("delete");
 				
 				System.out.println("삭제 후 readCmd(당연히 없겠찌..) : " + readCmd);
@@ -60,19 +59,17 @@ public class TdLikeController {
 			} else {
 				// 비어있으면 insert
 				service.insertTdlike(tdlikeVo);
-				readCmd.setUpdateType("insert");
 				memberActCntCmd.setUpdateType("insert");
+				
 				System.out.println("찜한 후 readCmd : " + readCmd);
 				System.out.println("readCmd.insert : " + tdlikeVo.toString());
 				System.out.println("memberActCntCmd.insert : " + memberActCntCmd.toString());
 
 				url = "redirect:/readView?boardNum=" + tdlikeVo.getBoardNum() + "&memberNum=" + tdlikeVo.getMemberNum();
 			}
-			service.boardTotalLike(readCmd);
+			service.boardTotalLike(memberActCntCmd);
 			service.memberActCntCmd(memberActCntCmd);
 			service.memberLikeReceiveCnt(memberActCntCmd);
-
-			System.out.println("업데이트 타입 확인 : " + readCmd.getUpdateType());
 			// return "redirect:/readView?boardNum=" + readCmd.getBoardNum();
 		}
 		// delete 동작 후

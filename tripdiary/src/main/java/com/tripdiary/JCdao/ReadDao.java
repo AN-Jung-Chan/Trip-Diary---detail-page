@@ -3,7 +3,6 @@ package com.tripdiary.JCdao;
 import java.util.List;
 
 import com.tripdiary.JCcontroller.MemberActCntCmd;
-import com.tripdiary.JCcontroller.ReadViewCmd;
 import com.tripdiary.JCvo.BoardImgVo;
 import com.tripdiary.JCvo.MemberVo;
 import com.tripdiary.JCvo.PickVo;
@@ -19,7 +18,7 @@ public interface ReadDao {
 	public MemberVo login(String id) throws Exception;
 
 	// 게시물 목록 조회 - 임시
-	public List<ReadVo> list() throws Exception;
+	public List<ReadVo> list(ReadVo readVo) throws Exception;
 
 	// 게시물 상세 보기 - 맡은 주 기능
 	public ReadVo read(int boardNum) throws Exception;
@@ -70,7 +69,7 @@ public interface ReadDao {
 	public List<TagVo> tagList(int boardNum) throws Exception;
 
 	// 좋아요 board테이블에 카운팅
-	public void boardTotalLike(ReadViewCmd readViewCmd) throws Exception;
+	public void boardTotalLike(MemberActCntCmd memberActCntCmd) throws Exception;
 
 	// 해당 멤버의 활동 카운팅
 	public void memberActCntCmd(MemberActCntCmd memberActCntCmd) throws Exception;

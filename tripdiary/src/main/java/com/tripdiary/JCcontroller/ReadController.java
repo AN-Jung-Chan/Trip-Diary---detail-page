@@ -60,7 +60,7 @@ public class ReadController {
 
 	// 게시판 목록 조회 - 임시
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
-	public String list(Model model, HttpSession session) throws Exception {
+	public String list(ReadVo readVo, Model model, HttpSession session) throws Exception {
 		logger.info("list");
 
 		// 로그인시 memberVo 에 로그인 회원 memberNum 셋팅
@@ -71,7 +71,7 @@ public class ReadController {
 			System.out.println(memberVo);
 
 			// 동시에 readVo의 정보 전체를 List로 값 셋팅 - 사용가능
-			List<ReadVo> list = service.list();
+			List<ReadVo> list = service.list(readVo);
 			System.out.println(list.toString());
 
 			model.addAttribute("list", list);
@@ -81,7 +81,7 @@ public class ReadController {
 
 	// 게시판 상세 보기 + 댓글 목록
 	@RequestMapping(value = "/readView", method = RequestMethod.GET)
-	public String read(PickVo pick, TdLikeVo tdlike, ReadViewCmd readCmd, Model model, HttpSession session)
+	public String read(ReadVo readVo, ReadViewCmd readCmd, Model model, HttpSession session)
 			throws Exception {
 		logger.info("read");
 
@@ -170,7 +170,7 @@ public class ReadController {
 		memberActCntCmd.setUpdateType("insert");
 		service.replyActCnt(memberActCntCmd);
 		System.out.println("reply :memberActCntCmd.insert : " + memberActCntCmd.toString());
-		
+
 		return "redirect:/readView?boardNum=" + replyVo.getBoardNum();
 	}
 

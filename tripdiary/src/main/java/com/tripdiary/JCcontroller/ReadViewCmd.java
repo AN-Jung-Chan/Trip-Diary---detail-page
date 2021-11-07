@@ -3,7 +3,6 @@ package com.tripdiary.JCcontroller;
 public class ReadViewCmd {
 	private int boardNum;
 	private int memberNum;
-	private String updateType;
 
 	public ReadViewCmd() {
 		// TODO Auto-generated constructor stub
@@ -30,17 +29,9 @@ public class ReadViewCmd {
 		this.memberNum = memberNum;
 	}
 
-	public String getUpdateType() {
-		return updateType;
-	}
-
-	public void setUpdateType(String updateType) {
-		this.updateType = updateType;
-	}
-
 	@Override
 	public String toString() {
-		return "ReadViewCmd [boardNum=" + boardNum + ", memberNum=" + memberNum + ", updateType=" + updateType + "]";
+		return "ReadViewCmd [boardNum=" + boardNum + ", memberNum=" + memberNum + "]";
 	}
 
 }

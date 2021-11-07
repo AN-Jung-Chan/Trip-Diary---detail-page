@@ -24,29 +24,29 @@
 			<%@include file="nav.jsp"%>
 		</div>
 		<hr />
-
-		<section id="boardList">
-			<form role="form" method="get" action="/list">
-				<table>
-					<tr>
-						<th>번호</th>
-						<th>작성자</th>
-						<th>여행일</th>
-						<th>등록일</th>
-					</tr>
-
-					<c:forEach items="${list}" var="list">
+		
+			<div>
+				<form action="" method="get">
+					<table>
 						<tr>
-							<td><a href="/readView?boardNum=${list.boardNum}">
-							<c:out value="${list.boardNum}" /></a></td>
-							<td><c:out value="${list.nickname}" /></td>
-							<td><fmt:formatDate value="${list.tripdate}" pattern="yyyy-MM-dd" /></td>
-							<td><fmt:formatDate value="${list.regdate}" pattern="yyyy-MM-dd" /></td>
+							<th>게시글 번호</th> <th>닉네임</th> <th>작성일자</th> <th>여행일자</th>
 						</tr>
-					</c:forEach> 
-				</table>
-			</form>
-		</section>
+						
+						<c:if test="${list ne null }">
+							<c:forEach items="${list}" var="list" varStatus="loop">
+								<tr>
+									<td><a href="/readView?boardNum=${list.boardNum }">${list.boardNum}</a></td>
+									<td>${list.nickname }</td>
+									<td>${list.regdate }</td>
+									<td>${list.tripdate }</td>
+								</tr>
+							</c:forEach>
+						</c:if>
+					
+					</table>
+				</form>
+			</div>
+			
 		<hr />
 	</div>
 </body>

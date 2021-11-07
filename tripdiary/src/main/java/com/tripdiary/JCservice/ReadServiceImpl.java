@@ -7,7 +7,6 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Repository;
 
 import com.tripdiary.JCcontroller.MemberActCntCmd;
-import com.tripdiary.JCcontroller.ReadViewCmd;
 import com.tripdiary.JCdao.ReadDao;
 import com.tripdiary.JCvo.BoardImgVo;
 import com.tripdiary.JCvo.MemberVo;
@@ -32,8 +31,8 @@ public class ReadServiceImpl implements ReadService {
 
 	// 게시물 목록 조회 - 임시
 	@Override
-	public List<ReadVo> list() throws Exception {
-		return dao.list();
+	public List<ReadVo> list(ReadVo readVo) throws Exception {
+		return dao.list(readVo);
 	}
 
 	// 게시물 상세 보기 - 맡은 주 기능
@@ -134,8 +133,8 @@ public class ReadServiceImpl implements ReadService {
 
 	// 카운팅
 	@Override
-	public void boardTotalLike(ReadViewCmd readViewCmd) throws Exception {
-		dao.boardTotalLike(readViewCmd);
+	public void boardTotalLike(MemberActCntCmd memberActCntCmd) throws Exception {
+		dao.boardTotalLike(memberActCntCmd);
 	}
 
 	// 해당 멤버의 활동 카운팅
