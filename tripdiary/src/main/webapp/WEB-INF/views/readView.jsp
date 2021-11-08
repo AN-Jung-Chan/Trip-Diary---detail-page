@@ -171,8 +171,8 @@
 				
 				${replyList.nickname}  
 				<fmt:formatDate value="${replyList.regdate}" pattern="yyyy-MM-dd HH:mm" />   
-				<a href="/replyUpdate?replyNum=${replyList.replyNum}&boardNum=${read.boardNum }&memberNum=${memberVo.memberNum }" >수정</a>  
-               
+				<a href="/replyUpdate?replyNum=${replyList.replyNum}&boardNum=${read.boardNum }&memberNum=${memberVo.memberNum }" >수정</a>
+               	
 				<!-- c:choose 예시 esle if 너낌? -->
 				<c:choose>
 					<c:when test="${memberVo.memberNum eq replyList.memberNum }">
@@ -185,8 +185,8 @@
 				
 				<p>작성 내용 : ${replyList.content}</p>
 				</c:forEach>   
-				</ol>
-			</div>
+			</ol>
+		</div>
 	</div>
 	
 	<script src="${pageContext.request.contextPath}/resources/js/slideShow.js"></script>

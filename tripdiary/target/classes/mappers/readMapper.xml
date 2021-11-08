@@ -57,6 +57,13 @@
 	<!-- 게시글 수정하기는 태민이꺼 게시글 작성 받아오기 -->
 
 	<!-- 게시글 삭제 마지막에 구현하기 -->
+	<delete id="boardDelete" parameterType="boardVo">
+		delete from
+			board
+		where
+			and board_num = #{boardNum}
+			and member_num = #{memberNum}
+	</delete>
 
 	<!-- 댓글 목록 -->
 	<select id="replyList" parameterType="int" resultType="replyCommand">
