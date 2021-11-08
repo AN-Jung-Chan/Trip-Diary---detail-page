@@ -81,8 +81,7 @@ public class ReadController {
 
 	// 게시판 상세 보기 + 댓글 목록
 	@RequestMapping(value = "/readView", method = RequestMethod.GET)
-	public String read(ReadVo readVo, ReadViewCmd readCmd, Model model, HttpSession session)
-			throws Exception {
+	public String read(ReadVo readVo, ReadViewCmd readCmd, Model model, HttpSession session) throws Exception {
 		logger.info("read");
 
 		System.out.println(readCmd.toString());
@@ -141,6 +140,37 @@ public class ReadController {
 		model.addAttribute("tdLikeCheck", tdLikeCheck);
 
 		return "readView";
+	}
+
+	// 게시글 삭제
+	@RequestMapping(value = "/delete", method = RequestMethod.GET)
+	public String delete(ReadVo readVo, ReadViewCmd readCmd, Model model, HttpSession session) throws Exception {
+
+		logger.info("delete");
+
+		// hidden에 들어가는거 - 삭제해야하나??
+		ReadVo read = service.read(readCmd.getBoardNum());
+		System.out.println(read.toString());
+		model.addAttribute("tdLikeCnt 활용할 read", read);
+
+		// 현재 로그인 된 회원인지 아닌지 파악 후 본인글이면 삭제진행, 아니면 본인 게시글이 아니라는 안내멘트
+		MemberVo memberVo = (MemberVo) session.getAttribute("memberLoginTest");
+
+		MemberActCntCmd memberActCntCmd = new MemberActCntCmd(readCmd.getBoardNum(), memberVo.getMemberNum(),
+				memberVo.getMemberNum(), "deleteBoard");
+
+		if (memberVo != null) {
+			System.out.println("delete(memberVo) : " + memberVo.toString());
+			model.addAttribute("memberVo", memberVo);
+			
+			service.delete(readCmd.getBoardNum());
+			
+			memberActCntCmd.setTdLikeCnt(read.getTdLikeCnt());
+			memberActCntCmd.setUpdateType("delete");
+			service.deleteReceiveCnt(memberActCntCmd);
+			System.out.println("deleteReceiveCnt :memberActCntCmd.delete : " + memberActCntCmd.toString());
+		}
+		return "redirect:/list";
 	}
 
 	// 댓글 작성
@@ -241,10 +271,10 @@ public class ReadController {
 		System.out.println(memberVo.toString());
 		model.addAttribute("memberVo", memberVo);
 
+		// 댓글 삭제 업데이트
 		MemberActCntCmd memberActCntCmd = new MemberActCntCmd(readCmd.getBoardNum(), readCmd.getMemberNum(),
 				memberVo.getMemberNum(), "reply");
 
-		// 댓글 삭제 업데이트
 		service.replyDelete(replyVo);
 		System.out.println(replyVo.toString());
 

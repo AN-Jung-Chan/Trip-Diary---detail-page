@@ -41,17 +41,10 @@ public class ReadDaoImpl implements ReadDao {
 		return sqlSession.selectOne("readMapper.read", boardNum);
 	}
 
-	// 게시물 수정
-	@Override
-	public void update(ReadVo readVo) throws Exception {
-
-		sqlSession.update("readMapper.update", readVo);
-	}
-
 	// 게시물 삭제
 	@Override
 	public void delete(int boardNum) throws Exception {
-
+		System.out.println("게시글 삭제 보드넘 : " + boardNum);
 		sqlSession.delete("readMapper.delete", boardNum);
 	}
 
@@ -185,10 +178,15 @@ public class ReadDaoImpl implements ReadDao {
 		}
 	}
 
-	// 멤버가 좋아요 받은 총 개수 
+	// 멤버가 좋아요 받은 총 개수
 	@Override
 	public void memberLikeReceiveCnt(MemberActCntCmd memberActCntCmd) throws Exception {
 		sqlSession.update("readMapper.memberLikeReceiveCnt", memberActCntCmd);
 	}
 
+	@Override
+	public void deleteReceiveCnt(MemberActCntCmd memberActCntCmd) throws Exception {
+		sqlSession.update("readMapper.deleteReceiveCnt", memberActCntCmd);
+
+	}
 }

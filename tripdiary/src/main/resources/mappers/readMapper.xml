@@ -17,7 +17,9 @@
 		select
 			A.board_num,
 			B.member_num,
+			B.id,
 			A.content,
+			A.place,
 			A.regdate,
 			A.tripdate,
 			B.nickname,
@@ -38,7 +40,9 @@
 		select
 			A.board_num,
 			B.member_num,
+			B.id,
 			A.content,
+			A.place,
 			A.regdate,
 			A.tripdate,
 			A.td_like_cnt,
@@ -57,12 +61,11 @@
 	<!-- 게시글 수정하기는 태민이꺼 게시글 작성 받아오기 -->
 
 	<!-- 게시글 삭제 마지막에 구현하기 -->
-	<delete id="boardDelete" parameterType="boardVo">
+	<delete id="delete" parameterType="int">
 		delete from
 			board
 		where
-			and board_num = #{boardNum}
-			and member_num = #{memberNum}
+			board_num = #{boardNum}
 	</delete>
 
 	<!-- 댓글 목록 -->
@@ -292,5 +295,18 @@
 			</when>
 		</choose>
      </update>
+     
+     <!-- 게시글 삭제 후 해당 좋아요 횟수 차감 -->
+	<update id = "deleteReceiveCnt" parameterType="com.tripdiary.JCcontroller.MemberActCntCmd">
+			update member_act_cnt set
+			
+		<choose> 
+			<when test='memberAct.equals("deleteBoard") and updateType.equals("delete")'>
+             	 	td_like_receive_cnt = td_like_receive_cnt - #{tdLikeCnt} 
+             	 where 
+             	 	member_num = #{boardMemberNum}
+			</when>
+		</choose>
+     </update> 
 
 </mapper>
