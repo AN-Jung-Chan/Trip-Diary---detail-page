@@ -39,7 +39,8 @@
 	<select id="read" parameterType="int" resultType="readVo">
 		select
 			A.board_num,
-			B.member_num,
+			A.member_num as boardMemberNum,
+			B.member_num as memberNum,
 			B.id,
 			A.content,
 			A.place,

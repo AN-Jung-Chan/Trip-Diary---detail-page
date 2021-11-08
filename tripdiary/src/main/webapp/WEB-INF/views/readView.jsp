@@ -90,20 +90,20 @@
                               src="<spring:url value='/thumbnail/${boardImgList.storeFileName}'/>"
                               style="object-fit: cover"></li>
                         </c:forEach>
-                        <li><img alt=""
-                           src="<spring:url value='/image/test1.png'/>"
-                           style="object-fit: cover"></li>
-                        <li><img alt=""
-                           src="<spring:url value='/image/test2.png'/>"
-                           style="object-fit: cover"></li>
+                        <li><img alt="" src="<spring:url value='/image/test1.png'/>"
+                           style="object-fit: cover">
+                        </li>
+                        <li><img alt="" src="<spring:url value='/image/test2.png'/>"
+                           style="object-fit: cover">
+                        </li>
 
-                        <li><img alt=""
-                           src="<spring:url value='/image/test3.jpg'/>"
-                           style="object-fit: cover"></li>
+                        <li><img alt="" src="<spring:url value='/image/test3.jpg'/>"
+                           style="object-fit: cover">
+                        </li>
 
-                        <li><img alt=""
-                           src="<spring:url value='/image/test4.jpg'/>"
-                           style="object-fit: cover"></li>
+                        <li><img alt="" src="<spring:url value='/image/test4.jpg'/>"
+                           style="object-fit: cover">
+                        </li>
                      </ul>
 
                      <!--controls-->

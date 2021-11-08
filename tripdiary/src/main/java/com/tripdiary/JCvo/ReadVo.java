@@ -6,6 +6,7 @@ import java.util.Date;
 public class ReadVo {
 	private int boardNum;
 	private int memberNum;
+	private int boardMemberNum;
 	private String id;
 	private String nickname;
 	private String content;
@@ -21,12 +22,13 @@ public class ReadVo {
 		// TODO Auto-generated constructor stub
 	}
 
-	public ReadVo(int boardNum, int memberNum, String id, String nickname, String content, String place,
-			Timestamp regdate, Date tripdate, int tdLikeCnt, String profileOrgFileName, String profileStoreFileName,
-			String profileFileType) {
+	public ReadVo(int boardNum, int memberNum, int boardMemberNum, String id, String nickname, String content,
+			String place, Timestamp regdate, Date tripdate, int tdLikeCnt, String profileOrgFileName,
+			String profileStoreFileName, String profileFileType) {
 		super();
 		this.boardNum = boardNum;
 		this.memberNum = memberNum;
+		this.boardMemberNum = boardMemberNum;
 		this.id = id;
 		this.nickname = nickname;
 		this.content = content;
@@ -53,6 +55,14 @@ public class ReadVo {
 
 	public void setMemberNum(int memberNum) {
 		this.memberNum = memberNum;
+	}
+
+	public int getBoardMemberNum() {
+		return boardMemberNum;
+	}
+
+	public void setBoardMemberNum(int boardMemberNum) {
+		this.boardMemberNum = boardMemberNum;
 	}
 
 	public String getId() {
@@ -137,10 +147,11 @@ public class ReadVo {
 
 	@Override
 	public String toString() {
-		return "ReadVo [boardNum=" + boardNum + ", memberNum=" + memberNum + ", id=" + id + ", nickname=" + nickname
-				+ ", content=" + content + ", place=" + place + ", regdate=" + regdate + ", tripdate=" + tripdate
-				+ ", tdLikeCnt=" + tdLikeCnt + ", profileOrgFileName=" + profileOrgFileName + ", profileStoreFileName="
-				+ profileStoreFileName + ", profileFileType=" + profileFileType + "]";
+		return "ReadVo [boardNum=" + boardNum + ", memberNum=" + memberNum + ", boardMemberNum=" + boardMemberNum
+				+ ", id=" + id + ", nickname=" + nickname + ", content=" + content + ", place=" + place + ", regdate="
+				+ regdate + ", tripdate=" + tripdate + ", tdLikeCnt=" + tdLikeCnt + ", profileOrgFileName="
+				+ profileOrgFileName + ", profileStoreFileName=" + profileStoreFileName + ", profileFileType="
+				+ profileFileType + "]";
 	}
 
 }

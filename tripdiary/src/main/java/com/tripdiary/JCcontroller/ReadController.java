@@ -156,7 +156,7 @@ public class ReadController {
 		// 현재 로그인 된 회원인지 아닌지 파악 후 본인글이면 삭제진행, 아니면 본인 게시글이 아니라는 안내멘트
 		MemberVo memberVo = (MemberVo) session.getAttribute("memberLoginTest");
 
-		MemberActCntCmd memberActCntCmd = new MemberActCntCmd(readCmd.getBoardNum(), memberVo.getMemberNum(),
+		MemberActCntCmd memberActCntCmd = new MemberActCntCmd(readVo.getBoardNum(), readVo.getBoardMemberNum(),
 				memberVo.getMemberNum(), "deleteBoard");
 
 		if (memberVo != null) {
